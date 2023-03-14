@@ -26,10 +26,28 @@ header{
         button:hover{
             cursor: pointer;
             p{
-                padding: 5px;
+                padding: $xsmallM;
                 border-bottom: 1px solid $secondaryColor;
                 transition: all .2s ease;
             }
+        }
+    }
+    .cart{
+        display: flex;
+        align-items: center;
+        button{
+            height: min-content;
+            border-bottom: 1px solid $primaryColor;
+            border-top: 1px solid $primaryColor;
+            svg{
+                fill: $secondaryColor;
+            }
+        }
+        button:hover{
+            cursor: pointer;
+            padding: $xsmallM;
+            border-bottom: 1px solid $secondaryColor;
+            transition: all .2s ease;
         }
     }
 }

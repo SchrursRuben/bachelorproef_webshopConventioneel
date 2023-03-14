@@ -112,12 +112,18 @@
                             #{$property}: $value;
                         }   
                     }
+                    svg{
+                        fill: $primaryColor;
+                    }
                 }
                 .buyButton:hover{
                     cursor: pointer;
                     background-color: $primaryColor;
                     color: $secondaryColor;
                     transition: all .2s ease;
+                    svg{
+                        fill: $secondaryColor;
+                    }
                 }
                 .releaseDescription{
                     color: $secondaryColor;

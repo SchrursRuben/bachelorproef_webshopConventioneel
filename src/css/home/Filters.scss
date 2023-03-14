@@ -1,9 +1,40 @@
 @import '../App';
 
-.filters{
+.filterWrapper{
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
     border-bottom: 1px solid $secondaryColor;
     padding: $mediumM;
+    .filters{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .showMoreDiv{
+        display: flex;
+        justify-content: center;
+        .showMoreButton{
+            padding: $mediumM 0 0;
+            border: 0;
+            background-color: $primaryColor;
+            color: $secondaryColor;
+        }
+        .showMoreButton:hover{
+            cursor: pointer;
+            margin: $smallM 0 0;
+            padding: $smallM;
+            border-bottom: 1px solid $secondaryColor;
+            transition: all .2s ease;
+        }
+    }
+}
+
+@media (min-width: 850px) {
+    .filterWrapper {
+        .showMoreDiv{
+            justify-content: flex-end;
+        }
+    }
 }

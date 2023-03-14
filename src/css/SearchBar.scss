@@ -8,7 +8,10 @@
     border-bottom: 1px solid $secondaryColor;
     padding: 0 $mediumM;
     .searchField{
+        width: 100%;
         input{
+            width: 95%;
+            height: 100%;
             margin: 0;
             border: none;
             border-left: 1px solid $secondaryColor;
@@ -22,15 +25,18 @@
         }
         input:focus{
             outline: none;
+            border-left: 0px;
+            border-bottom: 1px solid $secondaryColor;
+            padding: $smallM;
+            transition: all .3s ease;
         }
         input:focus::placeholder {
             color: transparent;
           }
     }
     .icon{
-        /*TEMP*/
-        p{
-            margin: 0;
+        svg{
+            fill: $secondaryColor;
         }
     }
 }

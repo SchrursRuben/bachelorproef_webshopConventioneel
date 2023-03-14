@@ -5,6 +5,7 @@
     flex-direction: column;
     border-bottom: 1px solid $secondaryColor;
     align-items: center;
+    padding-bottom: $mediumM;
     h2{
         width: $largeC;
         height: $smallC;
@@ -25,6 +26,24 @@
         flex-direction: column;
         margin-bottom: $smallM;
     }
+    .showMoreDiv{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        .showMoreButton{
+            padding: $mediumM 0 0;
+            border: 0;
+            background-color: $primaryColor;
+            color: $secondaryColor;
+        }
+        .showMoreButton:hover{
+            cursor: pointer;
+            margin: $smallM 0 0;
+            padding: $smallM;
+            border-bottom: 1px solid $secondaryColor;
+            transition: all .2s ease;
+        }
+    }
 }
 
 @media (min-width: 850px) {
@@ -39,6 +58,9 @@
             justify-content: space-between;
             flex-wrap: wrap;
             gap: $largeM;
+        }
+        .showMoreDiv{
+            justify-content: flex-end;
         }
     }
 }

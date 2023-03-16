@@ -1,16 +1,17 @@
 import '../../css/home/Filters.scss'
 import React, { useEffect, useState } from 'react';
 import { useReleases } from '../../contexts/ReleaseProvider'
+import { useSpotify } from '../../contexts/SpotifyProvider'
 import Filter from './Filter'
 
 export default function Filters() {
-    const { genres, getAllGenres } = useReleases()
+    const { genres, getGenres } = useSpotify()
     const [showAllGenres, setShowAllGenres] = useState(false)
 
     // Adding dependency causes infinite loop
     useEffect(() => {
         try {
-          getAllGenres()
+          getGenres()
         } catch (error) {
           console.error(error)
         }
@@ -25,11 +26,11 @@ export default function Filters() {
         <div className="filterWrapper">
           <div className='filters'>
             {showAllGenres
-              ? genres?.map(genre => <Filter genreName={genre} key={genre} />)
-              : genres?.slice(0, 6).map(genre => <Filter genreName={genre} key={genre} />)}
+              ? genres?.genres?.map(genre => <Filter genreName={genre} key={genre} />)
+              : genres?.genres?.slice(0, 9).map(genre => <Filter genreName={genre} key={genre} />)}
           </div>
           <div className='showMoreDiv'>
-            {genres && genres.length > 5 && (
+            {genres.genres && genres.genres.length > 5 && (
               <button onClick={handleShowMore} className="showMoreButton">
                 {showAllGenres ? 'Show Less' : 'Show More'}
               </button>

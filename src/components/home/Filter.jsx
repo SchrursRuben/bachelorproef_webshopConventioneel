@@ -5,7 +5,7 @@ export default function Filters({ genreName }) {
         <>
             <div className="filter">
                 <button>
-                    <p>{genreName}</p>
+                    <p>{genreName.charAt(0).toUpperCase() + genreName.slice(1)}</p>
                 </button>
             </div>
         </>

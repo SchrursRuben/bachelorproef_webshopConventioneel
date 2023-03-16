@@ -1,0 +1,10 @@
+{
+    "base_url":"http://localhost:9000/api/",
+    "spotify_auth_params": {
+        "CLIENT_ID": "65b5cd4b62c744dfbbce055561dc135c",
+        "CLIENT_SECRET" : "6bfb449b4f4946d69a56c5d91b491740",
+        "REDIRECT_URI": "http://localhost:3000",
+        "AUTH_ENDPOINT": "https://accounts.spotify.com/authorize",
+        "RESPONSE_TYPE": "token"
+    }
+}

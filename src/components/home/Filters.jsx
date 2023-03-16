@@ -14,7 +14,7 @@ export default function Filters() {
         } catch (error) {
           console.error(error)
         }
-    }, [])
+    }, [getGenres])
     
     const handleShowMore = () => {
       setShowAllGenres(prevState => !prevState); // toggle the state of showAllGenres

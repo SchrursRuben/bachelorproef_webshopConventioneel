@@ -1,6 +1,5 @@
 import '../../css/home/Filters.scss'
 import React, { useEffect, useState } from 'react';
-import { useReleases } from '../../contexts/ReleaseProvider'
 import { useSpotify } from '../../contexts/SpotifyProvider'
 import Filter from './Filter'
 

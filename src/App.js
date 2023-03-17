@@ -13,7 +13,7 @@ export default function App() {
       <SpotifyProvider>
         <Routes>
           <Route exact path='/' element={<HomePage/>}/>
-          <Route exact path='/details' element={<ReleasePage/>}/>
+          <Route exact path='/releaseDetails/:albumId' element={<ReleasePage/>}/>
         </Routes>
       </SpotifyProvider>
     </>

@@ -10,6 +10,7 @@ export const SpotifyProvider = ({ children }) => {
   const [loading, setLoading] = useState(false)
   const [newReleases, setNewReleases] = useState({})
   const [genres, setGenres] = useState({})
+  const [currentAlbum, setCurrentAlbum] = useState({})
 
   const refreshSpotify = useCallback(async () => {
     try {
@@ -47,6 +48,18 @@ export const SpotifyProvider = ({ children }) => {
       }
   }, [])
 
+  const getCurrentAlbum = useCallback(async (albumId) => {
+    try {
+      const data = await spotifyAPI.getAlbum(albumId)
+      setCurrentAlbum(data)
+      setError('')
+    } catch (error) {
+      setError(error)
+    } finally{
+      setLoading(false)
+    }
+  }, [])
+
   useEffect(() => {
     if (authVariables?.length === 0) {
       refreshSpotify()
@@ -60,6 +73,8 @@ export const SpotifyProvider = ({ children }) => {
     getNewReleases,
     genres,
     getGenres,
+    currentAlbum,
+    getCurrentAlbum,
     error,
     loading,
   }), [
@@ -69,6 +84,8 @@ export const SpotifyProvider = ({ children }) => {
     getNewReleases,
     genres,
     getGenres,
+    currentAlbum,
+    getCurrentAlbum,
     error,
     loading,
   ]

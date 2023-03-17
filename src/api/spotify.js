@@ -32,3 +32,10 @@ const {
 } = await axios.get('spotify/genres')
 return data
 }
+
+export const getAlbum = async (albumId) => {
+    const {
+      data
+    } = await axios.get(`spotify/album/${albumId}`)
+    return data
+}

@@ -1,6 +1,5 @@
-import Catalogue from './home/Catalogue'
-import Filters from './home/Filters'
 import Trending from './home/Trending'
+import Filters from './home/Filters'
 
 import '../css/Home.scss'
 
@@ -9,7 +8,6 @@ export default function Home () {
     <>
         <div className='homeWrapper'>
             <Filters/>
-            <Catalogue/>
             <Trending/>
         </div>
     </>

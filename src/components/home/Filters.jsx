@@ -5,7 +5,7 @@ import Filter from './Filter'
 
 export default function Filters() {
     const { genres, getGenres } = useSpotify()
-    const [showAllGenres, setShowAllGenres] = useState(false)
+    const [ showAllGenres, setShowAllGenres ] = useState(false)
 
     // Adding dependency causes infinite loop
     useEffect(() => {

@@ -4,8 +4,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex-wrap: wrap;
-    margin-bottom: $xlargeM;
+    padding-bottom: $mediumM;
     h2{
         width: $largeC;
         height: $smallC;
@@ -21,12 +20,28 @@
         align-items: center;
         justify-content: center;
     }
-    .trendingList{
+    .trendingReleases{
         display: flex;
-        flex-wrap: wrap;
-        width: 100%;
+        flex-direction: column;
+        margin-bottom: $smallM;
+    }
+    .showMoreDiv{
+        display: flex;
         justify-content: center;
-        gap: $mediumM;
+        width: 100%;
+        .showMoreButton{
+            padding: $mediumM 0 0;
+            border: 0;
+            background-color: $primaryColor;
+            color: $secondaryColor;
+        }
+        .showMoreButton:hover{
+            cursor: pointer;
+            margin: $smallM 0 0;
+            padding: $smallM;
+            border-bottom: 1px solid $secondaryColor;
+            transition: all .2s ease;
+        }
     }
 }
 
@@ -36,8 +51,15 @@
             width: 100%;
             justify-content: flex-start;
         }
-        .trendingList{
+        .trendingReleases{
+            flex-direction: row;
+            width: 100%;
+            justify-content: space-between;
+            flex-wrap: wrap;
             gap: $largeM;
+        }
+        .showMoreDiv{
+            justify-content: flex-end;
         }
     }
 }

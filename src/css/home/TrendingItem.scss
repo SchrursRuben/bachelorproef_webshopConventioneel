@@ -5,13 +5,14 @@
     border: none;
     background-color: $primaryColor;
     .releaseCoverArt{
+        transition: all .3s ease-in-out;
         width: 256px;
         height: 256px;
         background-color: #ddd;
         display: flex;
         justify-content: center;
         align-items: center;
-        box-shadow: 5px 5px 5px #888888;
+        // box-shadow: 5px 5px 5px rgba($color: #000000, $alpha: .8);
         border: 3px solid $secondaryColor;
         img{
             width: 256px;
@@ -20,6 +21,7 @@
     }
     .releaseDescription{
         color: $secondaryColor;
+        transition: all .3s ease-in-out;
         text-align: start;
         .releaseInfo{
             display: flex;
@@ -59,10 +61,8 @@
     cursor: pointer;
     .releaseCoverArt{
         box-shadow: none;
-        transition: all .3s;
     }
     .releaseDescription{
         padding-left: $smallM;
-        transition: all .3s;
     }
 }

@@ -5,8 +5,8 @@
 */
 
 /* Colors */
-$primaryColor: #FFFFFF;
-$secondaryColor: #621311;
+$primaryColor: #232323;
+$secondaryColor: #d5fff4;
 /* Margin & Padding Sizes */
 $xxsmallM: .125rem;
 $xsmallM: .25rem;
@@ -71,4 +71,5 @@ $descriptionFont: (
 
 body{
     margin: 0;
+    background-color: $primaryColor;
 }

@@ -28,7 +28,7 @@ export default function Trending() {
             {showAllItems ? (
               newReleases?.albums?.items?.map(item => <TrendingItem albumObject={item} key={item?.id} />)
             ) : (
-              newReleases?.albums?.items?.slice(0, 10).map(item => <TrendingItem albumObject={item} key={item?.id} />)
+              newReleases?.albums?.items?.slice(0, 8).map(item => <TrendingItem albumObject={item} key={item?.id} />)
             )}
           </div>
           <div className='showMoreDiv'>

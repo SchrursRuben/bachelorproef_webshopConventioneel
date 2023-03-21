@@ -5,50 +5,49 @@ header{
     justify-content: space-between;
     border-bottom: 1px solid $secondaryColor;
     padding: 0 $mediumM;
-    button{
-        padding: 0;
+    height: $smallC;
+    align-items: center;
+    a{
+        display: flex;
+        align-items: center;
         border: 0;
         background-color: $primaryColor;
-        height: $smallC;
-        color: $secondaryColor;
-        p{
-            margin: 0;
-            padding: 0;
-            @each $property, $value in $headerFont {
-                #{$property}: $value;
-            }
+        margin: 0;
+        padding: 0;
+        height: min-content;
+        @each $property, $value in $headerFont {
+            #{$property}: $value;
         }
+        text-decoration: none;
+        color: $secondaryColor;
+        transition: all .3s ease-in-out;
     }
     .logo{
-        button{
-            text-align: start;
-        }
-        button:hover{
-            cursor: pointer;
-            p{
-                padding: $xsmallM;
-                border-bottom: 1px solid $secondaryColor;
-                transition: all .2s ease;
-            }
+        height: inherit;
+        display: flex;
+        align-items: center;
+    }
+    .logo:hover{
+        cursor: pointer;
+        a{
+            padding: $xsmallM;
+            border-bottom: 1px solid $secondaryColor;
         }
     }
     .cart{
         display: flex;
         align-items: center;
-        button{
-            height: min-content;
-            border-bottom: 1px solid $primaryColor;
-            border-top: 1px solid $primaryColor;
-            svg{
-                fill: $secondaryColor;
-            }
+        border-bottom: 1px solid $primaryColor;
+        border-top: 1px solid $primaryColor;
+        transition: all .3s ease-in-out;
+        svg{
+            fill: $secondaryColor;
         }
-        button:hover{
-            cursor: pointer;
-            padding: $xsmallM;
-            border-bottom: 1px solid $secondaryColor;
-            transition: all .2s ease;
-        }
+    }
+    .cart:hover{
+        cursor: pointer;
+        padding: $xsmallM;
+        border-bottom: 1px solid $secondaryColor;
     }
 }
 

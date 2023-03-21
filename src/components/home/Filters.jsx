@@ -30,9 +30,9 @@ export default function Filters() {
           </div>
           <div className='showMoreDiv'>
             {genres.genres && genres.genres.length > 5 && (
-              <button onClick={handleShowMore} className="showMoreButton">
+              <div onClick={handleShowMore} className="showMoreButton">
                 {showAllGenres ? 'Show Less' : 'Show More'}
-              </button>
+              </div>
             )}
           </div>
         </div>

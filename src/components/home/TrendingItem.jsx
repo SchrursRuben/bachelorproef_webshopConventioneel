@@ -13,7 +13,7 @@ export default function TrendingItem( { albumObject } ) {
 
     return (
         <>
-            <button className='releaseLarge' onClick={handleTrendingItem}>
+            <div className='releaseLarge' onClick={handleTrendingItem}>
                 <div className='releaseCoverArt'>
                     <img src={albumObject?.images[1].url} alt="releaseCoverImage" />
                 </div>
@@ -28,7 +28,7 @@ export default function TrendingItem( { albumObject } ) {
                         </div>
                     </div>
                 </div>
-            </button>
+            </div>
         </>
     )
 }

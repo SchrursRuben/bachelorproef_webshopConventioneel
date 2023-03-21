@@ -50,11 +50,6 @@ export default function ReleaseDetails () {
                                     <h4 className='releasePrice'>€ 15,00</h4>
                                     <p className='releaseType'>LP</p>
                                 </div>
-                                {/* <div className='releaseGenres'>
-                                    {currentAlbum?.genres?.map(genre => {
-                                        return <h5>{genre}</h5>
-                                    })}
-                                </div> */}
                                 <div className='releaseLabelInfo'>
                                     <h4 className='labelText'>LABEL</h4>
                                     <h4 className='labelName'>{currentAlbum?.label}</h4>

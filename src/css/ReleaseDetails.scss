@@ -25,7 +25,7 @@
             .releaseCoverArt{
                 img{
                     width: 100%;
-                    box-shadow: 5px 5px 5px #888888;
+                    // box-shadow: 5px 5px 5px rgba($color: #000000, $alpha: .8);
                 }
             }
             .releaseInfoBuyButtonAndDescription{
@@ -55,21 +55,6 @@
                             }
                         }
                     }
-                    // .releaseGenres{
-                    //     display: flex;
-                    //     justify-content: flex-end;
-                    //     color: $secondaryColor;
-                    //     :not(:first-child){
-                    //         border-left: 1px solid $secondaryColor;
-                    //     }
-                    //     h5{
-                    //         margin: 0;
-                    //         padding: 0 $xsmallM;
-                    //         @each $property, $value in $h5Font {
-                    //             #{$property}: $value;
-                    //         }
-                    //     }
-                    // }
                     .releaseLabelInfo{
                         display: flex;
                         justify-content: space-between;
@@ -107,6 +92,7 @@
                         background-color: $secondaryColor;
                         color: $primaryColor;
                         border-bottom: 1px solid $secondaryColor;
+                        transition: all .3s ease-in-out;
                         h2{
                             @each $property, $value in $addToCartFont {
                                 #{$property}: $value;
@@ -120,7 +106,6 @@
                         cursor: pointer;
                         background-color: $primaryColor;
                         color: $secondaryColor;
-                        transition: all .2s ease;
                         svg{
                             fill: $secondaryColor;
                         }
@@ -162,11 +147,6 @@
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
-                    .releaseInfo{
-                        .releasePriceAndType{
-                            // margin-bottom: $xxlargeM;
-                        }
-                    }
                 }
             }
         }

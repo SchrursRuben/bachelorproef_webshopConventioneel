@@ -30,17 +30,20 @@
         justify-content: center;
         width: 100%;
         .showMoreButton{
-            padding: $mediumM 0 0;
+            margin: $mediumM 0 0;
             border: 0;
             background-color: $primaryColor;
             color: $secondaryColor;
+            @each $property, $value in $h5Font {
+                #{$property}: $value;
+            }
+            transition: all .3s ease-in-out;
         }
         .showMoreButton:hover{
             cursor: pointer;
             margin: $smallM 0 0;
             padding: $smallM;
             border-bottom: 1px solid $secondaryColor;
-            transition: all .2s ease;
         }
     }
 }
@@ -54,7 +57,7 @@
         .trendingReleases{
             flex-direction: row;
             width: 100%;
-            justify-content: space-between;
+            justify-content: space-evenly;
             flex-wrap: wrap;
             gap: $largeM;
         }

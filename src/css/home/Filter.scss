@@ -1,28 +1,24 @@
 @import '../App';
 
 .filter{
-    button{
-        padding: $smallM $mediumM;
-        margin: $xxsmallM;
-        border: 0;
-        height: $xsmallC;
-        min-width: min-content;
-        max-width: 100%;
-        background-color: $secondaryColor;
-        color: $primaryColor;
+    padding: $smallM $mediumM;
+    margin: $xxsmallM;
+    border: 0;
+    min-width: min-content;
+    max-width: 100%;
+    background-color: $secondaryColor;
+    color: $primaryColor;
+    transition: all 0.3s ease;
+    p{
         @each $property, $value in $filterFont {
             #{$property}: $value;
-          }
-
-        p{
-            margin: 0;
-            padding: 0;   
         }
+        margin: 0;
+        padding: 0;
     }
-    button:hover{
-        background-color: $primaryColor;
-        color: $secondaryColor;
-        cursor: pointer;
-        transition: all 0.2s ease;
-    }
+}
+.filter:hover{
+    background-color: $primaryColor;
+    color: $secondaryColor;
+    cursor: pointer;
 }

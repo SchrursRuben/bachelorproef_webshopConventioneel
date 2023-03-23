@@ -132,7 +132,35 @@
         }
     }
 }
-
+.sweetContainer{
+    .swal2-modal{
+        background-color: $primaryColor;
+        border: 3px solid $secondaryColor;
+        border-radius: 0;
+        .sweetTitle{
+            color: $secondaryColor;
+            @each $property, $value in $h4Font {
+                #{$property}: $value;
+            }
+        }
+        .sweetButton{
+            background-color: $secondaryColor;
+            color: $primaryColor;
+            border-bottom: 1px solid $secondaryColor;
+            border-radius: 0;
+            transition: all .3s ease-in-out;
+        }
+        .sweetButton:hover{
+            cursor: pointer;
+            background-color: $primaryColor;
+            color: $secondaryColor;
+        }
+        .sweetButton:focus{
+            outline: none;
+            box-shadow: none;
+        }
+    }
+}
 
 /* Desktop */
 @media (min-width: 850px) {

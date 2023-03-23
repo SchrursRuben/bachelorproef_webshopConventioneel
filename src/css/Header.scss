@@ -34,7 +34,7 @@ header{
             border-bottom: 1px solid $secondaryColor;
         }
     }
-    .cart{
+    .cartIcon{
         display: flex;
         align-items: center;
         border-bottom: 1px solid $primaryColor;
@@ -44,7 +44,7 @@ header{
             fill: $secondaryColor;
         }
     }
-    .cart:hover{
+    .cartIcon:hover{
         cursor: pointer;
         padding: $xsmallM;
         border-bottom: 1px solid $secondaryColor;

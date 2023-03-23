@@ -11,6 +11,8 @@ export const SpotifyProvider = ({ children }) => {
   const [newReleases, setNewReleases] = useState({})
   const [genres, setGenres] = useState({})
   const [currentAlbum, setCurrentAlbum] = useState({})
+  const [albums, setAlbums] = useState({})
+  const [cartItems, setCartItems] = useState([])
 
   const refreshSpotify = useCallback(async () => {
     try {
@@ -60,6 +62,18 @@ export const SpotifyProvider = ({ children }) => {
     }
   }, [])
 
+  const getAlbums = useCallback(async (albumIDs) => {
+    try {
+      const data = await spotifyAPI.getAlbums(albumIDs.map(String).join('%2C'))
+      setAlbums(data)
+      setError('')
+    } catch (error) {
+      setError(error)
+    } finally{
+      setLoading(false)
+    }
+  }, [])
+
   useEffect(() => {
     if (authVariables?.length === 0) {
       refreshSpotify()
@@ -75,6 +89,10 @@ export const SpotifyProvider = ({ children }) => {
     getGenres,
     currentAlbum,
     getCurrentAlbum,
+    albums,
+    getAlbums,
+    cartItems,
+    setCartItems,
     error,
     loading,
   }), [
@@ -86,6 +104,10 @@ export const SpotifyProvider = ({ children }) => {
     getGenres,
     currentAlbum,
     getCurrentAlbum,
+    albums,
+    getAlbums,
+    cartItems,
+    setCartItems,
     error,
     loading,
   ]

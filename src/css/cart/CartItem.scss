@@ -1,0 +1,67 @@
+@import '../App';
+
+.cartItem{
+    color: $secondaryColor;
+    margin: 0 0 $largeM;
+    .itemDetails{
+        .itemNameAndOther{
+            display: flex;
+            flex-direction: column;
+            .itemNameAndPrice{
+                display: flex;
+                justify-content: space-between;
+                @each $property, $value in $h4Font {
+                    #{$property}: $value;
+                }
+            }
+            .itemCoverAndOtherDetails{
+                display: flex;
+                align-items: flex-end;
+                .releaseCoverArt{
+                    width: 128px;
+                    height: 128px;
+                    background-color: #ddd;
+                    border: 3px solid $secondaryColor;
+                    img{
+                        width: 128px;
+                        height: 128px;
+                    }
+                }
+                .itemOtherDetails{
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    .quantity{
+                        margin: 0 $mediumM;
+                        padding: $smallM;
+                        width: $smallC;
+                        background-color: $primaryColor;
+                        color: $secondaryColor;
+                        border: 1px solid $secondaryColor;
+                        outline: 0;
+                    }
+                    .removeButton{
+                        padding: $smallM;
+                        width: $mediumC;
+                        background-color: $secondaryColor;
+                        color: $primaryColor;
+                        border: none;
+                        border-bottom: 1px solid $secondaryColor;
+                        transition: all .3s ease-in-out;
+                        p{
+                            margin: 0;
+                        }
+                    }
+                    .removeButton:hover{
+                        cursor: pointer;
+                        background-color: $primaryColor;
+                        color: $secondaryColor;
+                        svg{
+                            fill: $secondaryColor;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

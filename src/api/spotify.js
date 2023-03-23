@@ -33,9 +33,16 @@ const {
 return data
 }
 
-export const getAlbum = async (albumId) => {
+export const getAlbum = async (albumID) => {
     const {
       data
-    } = await axios.get(`spotify/album/${albumId}`)
+    } = await axios.get(`spotify/album/${albumID}`)
+    return data
+}
+
+export const getAlbums = async (albumIDs) => {
+    const {
+      data
+    } = await axios.get(`spotify/albums/${albumIDs}`)
     return data
 }

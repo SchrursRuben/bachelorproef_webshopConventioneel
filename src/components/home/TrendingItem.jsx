@@ -1,7 +1,6 @@
 import '../../css/home/TrendingItem.scss'
 import React, { useCallback } from 'react'
 import { useNavigate } from 'react-router'
-import { useSpotify } from '../../contexts/SpotifyProvider'
 
 
 export default function TrendingItem( { albumObject } ) {

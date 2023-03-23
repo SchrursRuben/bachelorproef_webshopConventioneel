@@ -1,0 +1,57 @@
+@import '../App';
+
+/* Mobile */
+.cartPageWrapper{
+    margin: 0 1rem;
+    .cart{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: $xlargeM;
+        h2{
+            width: $largeC;
+            height: $smallC;
+            margin: $mediumM 0;
+            border-bottom: 1px solid $secondaryColor;
+            text-align: center;
+            line-height: 37px;
+            color: $secondaryColor;
+            @each $property, $value in $h2Font {
+                #{$property}: $value;
+            }
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cartDetails{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            .cartItems{
+                margin-bottom: $largeM;
+            }
+            .cartOverview{
+                color: $secondaryColor;
+                border: 1px solid $secondaryColor;
+                padding: 0 $mediumM;
+                text-align: end;
+                @each $property, $value in $h2Font {
+                    #{$property}: $value;
+                }
+            }
+        }
+    }
+}
+
+/* Desktop */
+@media (min-width: 850px) {
+    .cartPageWrapper {
+        margin: 0 8rem;
+        .cart{
+            h2{
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+    }
+}

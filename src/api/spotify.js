@@ -46,3 +46,10 @@ export const getAlbums = async (albumIDs) => {
     } = await axios.get(`spotify/albums/${albumIDs}`)
     return data
 }
+
+export const getSearch = async (query) => {
+    const {
+      data
+    } = await axios.get(`spotify/search/${query}`)
+    return data
+}

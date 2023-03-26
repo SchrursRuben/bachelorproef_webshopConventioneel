@@ -6,7 +6,8 @@
     flex-wrap: wrap;
     justify-content: center;
     border-bottom: 1px solid $secondaryColor;
-    padding: $mediumM;
+    padding-bottom: $mediumM;
+    margin: $largeM 0 0;
     .filters{
         display: flex;
         flex-wrap: wrap;

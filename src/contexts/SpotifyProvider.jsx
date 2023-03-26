@@ -13,6 +13,7 @@ export const SpotifyProvider = ({ children }) => {
   const [currentAlbum, setCurrentAlbum] = useState({})
   const [albums, setAlbums] = useState({})
   const [cartItems, setCartItems] = useState([])
+  const [search, setSearch] = useState({})
 
   const refreshSpotify = useCallback(async () => {
     try {
@@ -73,6 +74,17 @@ export const SpotifyProvider = ({ children }) => {
       setLoading(false)
     }
   }, [])
+  const getSearch = useCallback(async (query) => {
+    try {
+      const data = await spotifyAPI.getSearch(encodeURIComponent(query))
+      setSearch(data)
+      setError('')
+    } catch (error) {
+      setError(error)
+    } finally{
+      setLoading(false)
+    }
+  }, [])
 
   useEffect(() => {
     if (authVariables?.length === 0) {
@@ -93,6 +105,8 @@ export const SpotifyProvider = ({ children }) => {
     getAlbums,
     cartItems,
     setCartItems,
+    getSearch,
+    search,
     error,
     loading,
   }), [
@@ -108,6 +122,8 @@ export const SpotifyProvider = ({ children }) => {
     getAlbums,
     cartItems,
     setCartItems,
+    getSearch,
+    search,
     error,
     loading,
   ]

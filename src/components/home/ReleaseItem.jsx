@@ -1,18 +1,18 @@
-import '../../css/home/TrendingItem.scss'
+import '../../css/home/ReleaseItem.scss'
 import React, { useCallback } from 'react'
 import { useNavigate } from 'react-router'
 
 
-export default function TrendingItem( { albumObject } ) {
+export default function ReleaseItem( { albumObject } ) {
     const navigate = useNavigate()
 
-    const handleTrendingItem = useCallback(() => {
+    const handleReleaseItem = useCallback(() => {
       navigate(`/releaseDetails/${albumObject?.id}`)
     }, [navigate, albumObject])
 
     return (
         <>
-            <div className='releaseLarge' onClick={handleTrendingItem}>
+            <div className='releaseLarge' onClick={handleReleaseItem}>
                 <div className='releaseCoverArt'>
                     <img src={albumObject?.images[1].url} alt="releaseCoverImage" />
                 </div>

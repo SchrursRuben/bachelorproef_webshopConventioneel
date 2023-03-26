@@ -71,17 +71,19 @@ export default function ReleaseDetails () {
         <>
             <div className='releaseDetailsWrapper'>
                 <div className='releaseDetails'>
-                    <div className='releaseTitle'>
+                    <div className='releaseTitleAndArtists'>
                         <h2>{currentAlbum?.name}</h2>
-                        {currentAlbum?.artists?.map((artist, index, artists) => {
-                            const artistName = artist.name
-                            const isLastArtist = index === artists.length - 1
-                            const separator = artists.length > 1 && !isLastArtist ? ', ' : ''
+                        <div className='releaseArtits'>
+                            {currentAlbum?.artists?.map((artist, index, artists) => {
+                                const artistName = artist.name
+                                const isLastArtist = index === artists.length - 1
+                                const separator = artists.length > 1 && !isLastArtist ? ',' : ''
 
-                            return (
-                                <h4 className='artistName' key={artist.id}>{artistName + separator}</h4>
-                            )
-                        })}
+                                return (
+                                    <h4 className='artistName' key={artist.id}>{artistName + separator}</h4>
+                                )
+                            })}
+                        </div>
                     </div>
                     <div className='releaseCoverArtInfoBuyButtonAndDescription'>
                         <div className='releaseCoverArt'>

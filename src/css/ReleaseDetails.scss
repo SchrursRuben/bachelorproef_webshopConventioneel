@@ -4,7 +4,7 @@
 .releaseDetailsWrapper{
     margin: 0 2rem;
     .releaseDetails{
-        .releaseTitle{
+        .releaseTitleAndArtists{
             color: $secondaryColor;
             h2{
                 margin: 0;
@@ -14,10 +14,14 @@
                     #{$property}: $value;
                 }
             }
-            h4{
-                margin: $smallM 0 $mediumM;
-                @each $property, $value in $h4Font {
-                    #{$property}: $value;
+            .releaseArtits{
+                display: flex;
+                gap: $smallM;
+                h4{
+                    margin: $smallM 0 $mediumM;
+                    @each $property, $value in $h4Font {
+                        #{$property}: $value;
+                    }
                 }
             }
         }
@@ -25,7 +29,6 @@
             .releaseCoverArt{
                 img{
                     width: 100%;
-                    // box-shadow: 5px 5px 5px rgba($color: #000000, $alpha: .8);
                 }
             }
             .releaseInfoBuyButtonAndDescription{

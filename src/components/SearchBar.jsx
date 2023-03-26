@@ -44,6 +44,7 @@ export default function SearchBar() {
             }
         }
         document.addEventListener("click", handleClickOutside)
+        console.log(search?.albums?.items)
         return () => {
             document.removeEventListener("click", handleClickOutside)
         }
@@ -73,7 +74,7 @@ export default function SearchBar() {
                 <div className="searchResults">
                     <h2>Results</h2>
                     {showAllItems ? (
-                        search?.albums?.items?.slice(0, 8).map(item => <ReleaseItem albumObject={item} key={item?.id} />)
+                        search?.albums?.items?.map(item => <ReleaseItem albumObject={item} key={item?.id} />)
                         ) : (
                             search?.albums?.items?.slice(0, 4).map(item => <ReleaseItem albumObject={item} key={item?.id} />)
                     )}

@@ -5,19 +5,48 @@
     border: none;
     background-color: $primaryColor;
     .releaseCoverArt{
+        position: relative;
         transition: all .3s ease-in-out;
         width: 256px;
         height: 256px;
-        background-color: #ddd;
         display: flex;
         justify-content: center;
         align-items: center;
-        // box-shadow: 5px 5px 5px rgba($color: #000000, $alpha: .8);
         border: 3px solid $secondaryColor;
         img{
             width: 256px;
             height: 256px;
+            display: block;
         }
+        &:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(127, 127, 127, 0.5);
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+        }
+        &:hover:after {
+            opacity: 1;
+        }
+    }
+    .iconDiv {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+        fill: $secondaryColor;
     }
     .releaseDescription{
         color: $secondaryColor;
@@ -55,6 +84,9 @@
                 }
             }
         }
+    }
+    &:hover .releaseCoverArt:after {
+        opacity: 1;
     }
 }
 .releaseLarge:hover{

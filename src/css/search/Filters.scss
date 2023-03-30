@@ -16,11 +16,15 @@
     .showMoreDiv{
         display: flex;
         justify-content: center;
+        width: 100%;
         .showMoreButton{
             margin: $mediumM 0 0;
             border: 0;
             background-color: $primaryColor;
             color: $secondaryColor;
+            border-bottom: 1px solid $primaryColor;
+            padding: $xsmallM 0;
+            border-top: 1px solid $primaryColor;
             @each $property, $value in $h5Font {
                 #{$property}: $value;
             }
@@ -28,8 +32,7 @@
         }
         .showMoreButton:hover{
             cursor: pointer;
-            margin: $smallM 0 0;
-            padding: $smallM;
+            padding: $xsmallM;
             border-bottom: 1px solid $secondaryColor;
         }
     }
@@ -37,6 +40,7 @@
 
 @media (min-width: 850px) {
     .filterWrapper {
+        margin: $largeM $mediumC;
         .showMoreDiv{
             justify-content: flex-end;
         }

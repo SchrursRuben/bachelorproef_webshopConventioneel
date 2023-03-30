@@ -1,5 +1,5 @@
 import Header from '../components/Header'
-import SearchBar from '../components/SearchBar'
+import SearchBar from '../components/search/SearchBar'
 import Footer from '../components/Footer'
 import ReleaseDetails from '../components/ReleaseDetails'
 

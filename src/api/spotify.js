@@ -20,36 +20,37 @@ return data
 }
 
 export const getNewReleases = async () => {
-const {
-    data
-} = await axios.get('spotify/new')
-return data
+  const {
+      data
+  } = await axios.get('spotify/new')
+  return data
 }
 
 export const getGenres = async () => {
-const {
-    data
-} = await axios.get('spotify/genres')
-return data
+  const {
+      data
+  } = await axios.get('spotify/genres')
+  return data
 }
 
 export const getAlbum = async (albumID) => {
-    const {
-      data
-    } = await axios.get(`spotify/album/${albumID}`)
-    return data
+  const {
+    data
+  } = await axios.get(`spotify/album/${albumID}`)
+  return data
 }
 
 export const getAlbums = async (albumIDs) => {
-    const {
-      data
-    } = await axios.get(`spotify/albums/${albumIDs}`)
-    return data
+  const {
+    data
+  } = await axios.get(`spotify/albums/${albumIDs}`)
+  return data
 }
 
 export const getSearch = async (query) => {
-    const {
-      data
-    } = await axios.get(`spotify/search/${query}`)
-    return data
+  // if (genre) {
+  //   url += `&genre=${genre}`
+  // }
+  const { data } = await axios.get(`spotify/search/${query}`)
+  return data
 }

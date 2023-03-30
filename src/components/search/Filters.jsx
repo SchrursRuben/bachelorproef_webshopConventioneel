@@ -1,29 +1,32 @@
-import '../../css/home/Filters.scss'
+import '../../css/search/Filters.scss'
 import React, { useEffect, useState } from 'react';
 import { useSpotify } from '../../contexts/SpotifyProvider'
 import Filter from './Filter'
 
-export default function Filters() {
+export default function Filters( {onSelected} ) {
     const { genres, getGenres } = useSpotify()
     const [showAllGenres, setShowAllGenres] = useState(false)
-    const [selectedFilters, setSelectedFilters] = useState([])
+    const [selectedFilter, setSelectedFilter] = useState(null)
 
     useEffect(() => {
       try {
         getGenres()
+
+        // Pass selected filter to parent
+        if (selectedFilter) {
+          onSelected(selectedFilter)
+        }
       } catch (error) {
         console.error(error)
       }
-    }, [getGenres])
-    
+    }, [getGenres, selectedFilter, onSelected])
     
     const handleShowMore = () => {
       setShowAllGenres(prevState => !prevState) // toggle the state of showAllGenres
     }
 
-    const selectRandomFilters = () => {
-      const randomFilters = genres?.genres?.sort(() => 0.5 - Math.random()).slice(0, 20)
-      setSelectedFilters(randomFilters)
+    const handleFilterSelect = (filter) => {
+      setSelectedFilter(filter)
     }
 
     return (
@@ -31,10 +34,9 @@ export default function Filters() {
         <div className="filterWrapper">
           <div className='filters'>
             {showAllGenres
-              ? genres?.genres?.map(genre => <Filter genreName={genre} key={genre} />)
-              : genres?.genres?.slice(0, 9).map(genre => <Filter genreName={genre} key={genre} />)}
+              ? genres?.genres?.map(genre => <Filter genreName={genre} key={genre} onSelect={handleFilterSelect}/>)
+              : genres?.genres?.slice(0, 9).map(genre => <Filter genreName={genre} key={genre} onSelect={handleFilterSelect}/>)}
           </div>
-          {/* {selectRandomFilters()} */}
           <div className='showMoreDiv'>
             {genres.genres && genres.genres.length > 5 && (
               <div onClick={handleShowMore} className="showMoreButton">

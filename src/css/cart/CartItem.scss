@@ -41,8 +41,8 @@
                         outline: 0;
                     }
                     .removeButton{
-                        padding: $smallM;
-                        width: $mediumC;
+                        padding: 0 $mediumM;
+                        width: fit-content;
                         background-color: $secondaryColor;
                         color: $primaryColor;
                         border: none;

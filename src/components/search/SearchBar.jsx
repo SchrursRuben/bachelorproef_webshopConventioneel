@@ -1,7 +1,8 @@
-import { useState, useRef, useEffect } from 'react';
-import '../css/SearchBar.scss'
-import { useSpotify } from '../contexts/SpotifyProvider';
-import ReleaseItem from '../components/home/ReleaseItem'
+import { useState, useRef, useEffect } from 'react'
+import '../../css/search/SearchBar.scss'
+import { useSpotify } from '../../contexts/SpotifyProvider'
+import ReleaseItem from '../home/ReleaseItem'
+// import Filters from './Filters'
 
 export default function SearchBar() {
     const [searchInput, setSearchInput] = useState("")
@@ -9,6 +10,7 @@ export default function SearchBar() {
     const [focused, setFocused] = useState(false)
     const {search, getSearch} = useSpotify()
     const [showAllItems, setShowAllItems] = useState(false)
+    // const [selectedFilter, setSelectedFilter] = useState(null)
 
     const svgStyle = {
         width: '20px', 
@@ -17,11 +19,37 @@ export default function SearchBar() {
         overflow: 'hidden' 
     }
 
+    // Focus useEffect
+    useEffect(() => {
+        if (search) {
+            setFocused(true)
+        }
+        const handleClickOutside = (e) => {
+            if (searchBarRef.current && !searchBarRef.current.contains(e.target)) {
+                setFocused(false)
+            }
+        }
+        document.addEventListener("click", handleClickOutside)
+        return () => {
+            document.removeEventListener("click", handleClickOutside)
+        }
+    }, [search])
+    // Search query useEffect
+    useEffect(() => {
+        if(searchInput.length > 1){
+            getSearch(searchInput)
+        }
+    }, [searchInput, getSearch])
+
+    const handleShowMore = () => {
+        setShowAllItems(prevState => !prevState)
+    }
+
     const handleChange = (e) => {
         e.preventDefault()
         setSearchInput(e.target.value)
-        getSearch(e.target.value)
     }
+
     // Clicking anywhere in the searchbar will let you search immediately, clicking again will exit the focus state
     const handleClick = (e) => {
         e.preventDefault()
@@ -34,25 +62,10 @@ export default function SearchBar() {
         setFocused(true)
         }
     }
-    useEffect(() => {
-        if (search) {
-            setFocused(true)
-        }
-        const handleClickOutside = (e) => {
-            if (searchBarRef.current && !searchBarRef.current.contains(e.target)) {
-                setFocused(false)
-            }
-        }
-        document.addEventListener("click", handleClickOutside)
-        console.log(search?.albums?.items)
-        return () => {
-            document.removeEventListener("click", handleClickOutside)
-        }
-    }, [search])
 
-    const handleShowMore = () => {
-        setShowAllItems(prevState => !prevState)
-    }
+    // const handleFilterSelect = (filter) => {
+    //     setSelectedFilter(filter)
+    // }
 
     return (
         <>
@@ -71,19 +84,21 @@ export default function SearchBar() {
                 </div>
             </div>
             {search?.albums?.items && searchInput.trim() !== "" ? 
+                // <>
                 <div className="searchResults">
                     <h2>Results</h2>
                     {showAllItems ? (
                         search?.albums?.items?.map(item => <ReleaseItem albumObject={item} key={item?.id} />)
-                        ) : (
-                            search?.albums?.items?.slice(0, 4).map(item => <ReleaseItem albumObject={item} key={item?.id} />)
+                    ) : (
+                        search?.albums?.items?.slice(0, 4).map(item => <ReleaseItem albumObject={item} key={item?.id} />)
                     )}
                     <div className='showMoreDiv'>
                         <button onClick={handleShowMore} className="showMoreButton">
-                        {showAllItems ? 'Show Less' : 'Show More'}
+                            {showAllItems ? 'Show Less' : 'Show More'}
                         </button>
                     </div>
                 </div>
+                // <Filters onSelected={handleFilterSelect} /></>
                 : null
             }
         </>

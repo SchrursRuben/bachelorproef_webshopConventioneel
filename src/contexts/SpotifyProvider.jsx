@@ -15,6 +15,37 @@ export const SpotifyProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([])
   const [search, setSearch] = useState({})
 
+  // Generate random prices, adding albumItems to dependency array will cause infinite loop warning
+  const albumItems = newReleases.albums?.items || search.albums?.items || []
+  const useAlbumPrices = (albumItems) => {
+    const [albumPrices, setAlbumPrices] = useState([])
+  
+    useEffect(() => {
+      const storedPrices = JSON.parse(localStorage.getItem('albumPrices') || '[]')
+  
+      if (storedPrices.length > 0) {
+        setAlbumPrices(storedPrices)
+      } else {
+        const prices = []
+  
+        albumItems.forEach((album) => {
+          const basePrice = 10
+          const rarityMultiplier = Math.random() * (5 - 1) + 1
+          const conditionMultiplier = Math.random() * (2 - 0.5) + 0.5
+          const price = Math.floor(basePrice * rarityMultiplier * conditionMultiplier)
+          prices.push({ id: album.id, price: `${price},95` })
+        })
+  
+        setAlbumPrices(prices)
+        localStorage.setItem('albumPrices', JSON.stringify(prices))
+      }
+    }, [])
+  
+    return albumPrices
+  }
+  const albumPrices = useAlbumPrices(albumItems)
+
+
   const refreshSpotify = useCallback(async () => {
     try {
       const data = await spotifyAPI.authSpotify()
@@ -74,9 +105,10 @@ export const SpotifyProvider = ({ children }) => {
       setLoading(false)
     }
   }, [])
-  const getSearch = useCallback(async (query) => {
+
+  const getSearch = useCallback(async (query, genre) => {
     try {
-      const data = await spotifyAPI.getSearch(encodeURIComponent(query))
+      const data = await spotifyAPI.getSearch(encodeURIComponent(query), encodeURIComponent(genre))
       setSearch(data)
       setError('')
     } catch (error) {
@@ -107,6 +139,7 @@ export const SpotifyProvider = ({ children }) => {
     setCartItems,
     getSearch,
     search,
+    albumPrices,
     error,
     loading,
   }), [
@@ -124,6 +157,7 @@ export const SpotifyProvider = ({ children }) => {
     setCartItems,
     getSearch,
     search,
+    albumPrices,
     error,
     loading,
   ]

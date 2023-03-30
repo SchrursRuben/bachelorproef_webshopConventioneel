@@ -4,14 +4,52 @@
 .releaseDetailsWrapper{
     margin: 0 2rem;
     .releaseDetails{
-        .releaseTitleAndArtists{
+        .releaseTitleAndArtistsAndSpotifyButton{
             color: $secondaryColor;
-            h2{
-                margin: 0;
-                padding: $largeM 0 $smallM;
-                border-bottom: 1px solid $secondaryColor;
-                @each $property, $value in $h2Font {
-                    #{$property}: $value;
+            .releaseTitleAndSpotifyButton{
+                display: flex;
+                h2{
+                    margin: 0;
+                    padding: $largeM 0 $mediumM;
+                    border-bottom: 1px solid $secondaryColor;
+                    width: 100%;
+                    @each $property, $value in $h2Font {
+                        #{$property}: $value;
+                    }
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                .spotifyButton{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: $mediumM;
+                    margin: 0 0 0 $mediumM;
+                    border-top: none;
+                    border-left: none;
+                    border-right: none;
+                    border-bottom: 1px solid;
+                    padding: $largeM $mediumM $mediumM;
+                    height: fit-content;
+                    background-color: $primaryColor;
+                    color: $spotifyGreen;
+                    transition: all .3s ease-in-out;
+                    p{
+                        margin: 0;
+                        width: max-content;
+                        display: none;
+                        @each $property, $value in $h2Font {
+                            #{$property}: $value;
+                        }
+                    }
+                    img{
+                        height: $xsmallC;
+                        width: fit-content;
+                    }
+                }
+                .spotifyButton:hover{
+                    cursor: pointer;
                 }
             }
             .releaseArtits{
@@ -25,109 +63,129 @@
                 }
             }
         }
-        .releaseCoverArtInfoBuyButtonAndDescription{
+        .releaseCoverArtInfoBuyButtonAndTracks{
             .releaseCoverArt{
-                img{
-                    width: 100%;
+                    img{
+                        width: 100%;
                 }
             }
-            .releaseInfoBuyButtonAndDescription{
-                .releaseInfo{
-                    .releasePriceAndType{
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        color: $secondaryColor;
-                        margin-bottom: $largeM;
-                        .releasePrice{
-                            @each $property, $value in $h4Font {
-                                #{$property}: $value;
-                            }
-                        }
-                        .releaseType{
-                            width: $smallC;
-                            height: $xsmallC;
-                            margin: 0;
-                            background-color: $secondaryColor;
-                            color: $primaryColor;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            @each $property, $value in $h4Font {
-                                #{$property}: $value;
-                            }
+        }
+        .releaseInfoBuyButtonAndTracks{
+            .releaseInfo{
+                .releasePriceAndType{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    color: $secondaryColor;
+                    .releasePrice{
+                        @each $property, $value in $h4Font {
+                            #{$property}: $value;
                         }
                     }
-                    .releaseLabelInfo{
+                    .releaseType{
+                        width: $smallC;
+                        height: $xsmallC;
+                        margin: 0;
+                        background-color: $secondaryColor;
+                        color: $primaryColor;
                         display: flex;
-                        justify-content: space-between;
-                        margin: $mediumM 0;
-                        border: 1px solid $secondaryColor;
-                        color: $secondaryColor;
                         align-items: center;
-                        .labelText{
-                            margin: 0;
-                            padding: $xsmallM $smallM;
-                            text-align: center;
-                            @each $property, $value in $h4Font {
-                                #{$property}: $value;
-                            }
-                        }
-                        .labelName{
-                            margin: 0;
-                            padding: $xsmallM $smallM;
-                            text-align: center;
-                            width: 100%;
-                            border-left: 1px solid $secondaryColor;
-                            @each $property, $value in $h4Font {
-                                #{$property}: $value;
-                            }
+                        justify-content: center;
+                        @each $property, $value in $h4Font {
+                            #{$property}: $value;
                         }
                     }
                 }
-                .releaseBuyButtonAndDescription{
-                    .buyButton{
-                        display: flex;
-                        justify-content: space-evenly;
-                        align-items: center;
+                .releaseDate{
+                    text-align: end;
+                    color: $secondaryColor;
+                    @each $property, $value in $h4Font {
+                        #{$property}: $value;
+                    }
+                    p{
+                        margin: $mediumM 0 0;
+                    }
+                }
+                .releaseLabelInfo{
+                    display: flex;
+                    justify-content: space-between;
+                    margin: $mediumM 0;
+                    border: 1px solid $secondaryColor;
+                    color: $secondaryColor;
+                    align-items: center;
+                    .labelText{
+                        margin: 0;
+                        padding: $xsmallM $smallM;
+                        text-align: center;
+                        @each $property, $value in $h4Font {
+                            #{$property}: $value;
+                        }
+                    }
+                    .labelName{
+                        margin: 0;
+                        padding: $xsmallM $smallM;
+                        text-align: center;
                         width: 100%;
-                        height: $smallC;    
-                        background-color: $secondaryColor;
-                        color: $primaryColor;
+                        border-left: 1px solid $secondaryColor;
+                        @each $property, $value in $h4Font {
+                            #{$property}: $value;
+                        }
+                    }
+                }
+            }
+            .releaseBuyButtonAndTracks{
+                .buyButton{
+                    display: flex;
+                    justify-content: space-evenly;
+                    align-items: center;
+                    width: 100%;
+                    height: $smallC;    
+                    background-color: $secondaryColor;
+                    color: $primaryColor;
+                    border-bottom: 1px solid $secondaryColor;
+                    transition: all .3s ease-in-out;
+                    h2{
+                        @each $property, $value in $addToCartFont {
+                            #{$property}: $value;
+                        }   
+                    }
+                    svg{
+                        fill: $primaryColor;
+                    }
+                }
+                .buyButton:hover{
+                    cursor: pointer;
+                    background-color: $primaryColor;
+                    color: $secondaryColor;
+                    svg{
+                        fill: $secondaryColor;
+                    }
+                }
+                .extraTitle{
+                    h2{
+                        color: $secondaryColor;
+                        margin: $mediumM 0 0 0;
+                        padding: $mediumM;
+                        border: 1px solid $secondaryColor;
+                        text-align: center;
+                        @each $property, $value in $h5Font {
+                            #{$property}: $value;
+                        }
+                    }
+                }
+                .releaseTracks{
+                    color: $secondaryColor;
+                    h2{
+                        margin: 0;
+                        padding: $largeM 0 $smallM;
                         border-bottom: 1px solid $secondaryColor;
-                        transition: all .3s ease-in-out;
-                        h2{
-                            @each $property, $value in $addToCartFont {
-                                #{$property}: $value;
-                            }   
-                        }
-                        svg{
-                            fill: $primaryColor;
+                        @each $property, $value in $h2Font {
+                            #{$property}: $value;
                         }
                     }
-                    .buyButton:hover{
-                        cursor: pointer;
-                        background-color: $primaryColor;
-                        color: $secondaryColor;
-                        svg{
-                            fill: $secondaryColor;
-                        }
-                    }
-                    .releaseDescription{
-                        color: $secondaryColor;
-                        h2{
-                            margin: 0;
-                            padding: $largeM 0 $smallM;
-                            border-bottom: 1px solid $secondaryColor;
-                            @each $property, $value in $h2Font {
-                                #{$property}: $value;
-                            }
-                        }
-                        p{
-                            text-align: justify;
-                            @each $property, $value in $descriptionFont {
-                                #{$property}: $value;
-                            }
+                    p{
+                        @each $property, $value in $tracksFont {
+                            #{$property}: $value;
                         }
                     }
                 }
@@ -166,14 +224,27 @@
 }
 
 /* Desktop */
-@media (min-width: 850px) {
+@media (min-width: 1200px) {
     .releaseDetailsWrapper {
         margin: 0 $xxlargeM $xlargeM;
         .releaseDetails{
-            .releaseCoverArtInfoBuyButtonAndDescription{
+            .releaseTitleAndArtistsAndSpotifyButton{
+                .releaseTitleAndSpotifyButton{
+                    .spotifyButton{
+                        width: 20%;
+                        p{
+                            display: block;
+                        }
+                    }
+                    .spotifyButton:hover{
+                        width: 30%;
+                    }
+                }
+            }
+            .releaseCoverArtInfoBuyButtonAndTracks{
                 display: flex;
                 gap: $xlargeM;
-                .releaseInfoBuyButtonAndDescription{
+                .releaseInfoBuyButtonAndTracks{
                     flex: 1;
                     display: flex;
                     flex-direction: column;

@@ -48,9 +48,6 @@ export const getAlbums = async (albumIDs) => {
 }
 
 export const getSearch = async (query) => {
-  // if (genre) {
-  //   url += `&genre=${genre}`
-  // }
   const { data } = await axios.get(`spotify/search/${query}`)
   return data
 }

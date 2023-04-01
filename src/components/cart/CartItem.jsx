@@ -4,9 +4,10 @@ import { useSpotify } from '../../contexts/SpotifyProvider'
 
 export default function CartItem({ item, onRemove, calculateAmountOfItems }) {
     const [selectedItems, setSelectedItems] = useState([])
-    const {albums} = useSpotify()
+    const { albums, setCartItems, cartItems } = useSpotify()
     const [release, setRelease] = useState({})
     const [quantity, setQuantity] = useState(item.quantity)
+    const [price, setPrice] = useState(item.price)
 
     const getRelease = useCallback(() => {
         try {
@@ -28,6 +29,15 @@ export default function CartItem({ item, onRemove, calculateAmountOfItems }) {
             // Get release
             getRelease()
 
+            // Get Price
+            const pricesFromStorage = JSON.parse(localStorage.getItem('albumPrices')) || []
+            if (item.id) {
+                const priceCurrentAlbum = pricesFromStorage.find(album => album.id === item.id) || {}
+                if (priceCurrentAlbum) {
+                    setPrice(priceCurrentAlbum.price)
+                }
+            }
+
         } catch (error) {
             console.error(error)
         }
@@ -43,37 +53,48 @@ export default function CartItem({ item, onRemove, calculateAmountOfItems }) {
         // Recalculate the amount of items
         calculateAmountOfItems()
     }, [selectedItems, item, onRemove, calculateAmountOfItems])
-    
+
     const handleQuantityChange = useCallback((event) => {
         const value = event.target.value
-
         if (value === 'custom') {
-          const customQuantity = window.prompt('Enter custom quantity:')
-          if (customQuantity) {
-            setQuantity(parseInt(customQuantity))
+            const customQuantity = window.prompt('Enter custom quantity:')
+            if (customQuantity) {
+                setQuantity(parseInt(customQuantity))
+                const updatedItems = JSON.parse(localStorage.getItem('selectedItems')).map((i) => {
+                    if (i.id === item.id) {
+                        i.quantity = parseInt(customQuantity)
+                    }
+                    return i
+                })
+                localStorage.setItem('selectedItems', JSON.stringify(updatedItems))
+            }
+        } else {
+            const newQuantity = Number(value)
+            setQuantity(newQuantity)
             const updatedItems = JSON.parse(localStorage.getItem('selectedItems')).map((i) => {
-              if (i.id === item.id) {
-                i.quantity = parseInt(customQuantity)
-              }
-              return i
+                if (i.id === item.id) {
+                    i.quantity = newQuantity
+                }
+                return i
             })
             localStorage.setItem('selectedItems', JSON.stringify(updatedItems))
-          }
-        } else {
-          const newQuantity = Number(value)
-          setQuantity(newQuantity)
-          const updatedItems = JSON.parse(localStorage.getItem('selectedItems')).map((i) => {
-            if (i.id === item.id) {
-              i.quantity = newQuantity
-            }
-            return i
-          })
-          localStorage.setItem('selectedItems', JSON.stringify(updatedItems))
         }
+        setCartItems((prev) => {
+            const updatedPrev = prev.map((i) => {
+                if (i.id === item.id) {
+                    return {
+                        ...i,
+                        quantity: Number(value)
+                    }
+                }
+                return i
+            })
+            return updatedPrev
+        })
         // Recalculate the amount of items
         calculateAmountOfItems()
-    }, [item.id, calculateAmountOfItems])
-      
+    }, [cartItems])
+
     const handleCustomQuantity = useCallback(() => {
         if (quantity) {
             if (quantity <= 5) {
@@ -83,14 +104,14 @@ export default function CartItem({ item, onRemove, calculateAmountOfItems }) {
             }
         }
     }, [quantity])
-    
+
     return (
         <div className='cartItem'>
             <div className='itemDetails'>
                 <div className='itemNameAndOther'>
                     <div className='itemNameAndPrice'>
                         <h4>{release?.name}</h4>
-                        <h4 className='releasePrice'>€ 15,00</h4>
+                        <h4 className='releasePrice'>€ {price}</h4>
                     </div>
                     <div className='itemCoverAndOtherDetails'>
                         <div className='releaseCoverArt'>

@@ -215,6 +215,7 @@
             cursor: pointer;
             background-color: $primaryColor;
             color: $secondaryColor;
+            background-image: none;
         }
         .sweetButton:focus{
             outline: none;

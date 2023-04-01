@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from 'react'
 import '../../css/search/SearchBar.scss'
 import { useSpotify } from '../../contexts/SpotifyProvider'
 import ReleaseItem from '../home/ReleaseItem'
-// import Filters from './Filters'
 
 export default function SearchBar() {
     const [searchInput, setSearchInput] = useState("")
@@ -10,7 +9,6 @@ export default function SearchBar() {
     const [focused, setFocused] = useState(false)
     const {search, getSearch} = useSpotify()
     const [showAllItems, setShowAllItems] = useState(false)
-    // const [selectedFilter, setSelectedFilter] = useState(null)
 
     const svgStyle = {
         width: '20px', 
@@ -34,6 +32,7 @@ export default function SearchBar() {
             document.removeEventListener("click", handleClickOutside)
         }
     }, [search])
+    
     // Search query useEffect
     useEffect(() => {
         if(searchInput.length > 1){
@@ -63,10 +62,6 @@ export default function SearchBar() {
         }
     }
 
-    // const handleFilterSelect = (filter) => {
-    //     setSelectedFilter(filter)
-    // }
-
     return (
         <>
             <div className="searchBar" onClick={handleClick}>
@@ -84,7 +79,6 @@ export default function SearchBar() {
                 </div>
             </div>
             {search?.albums?.items && searchInput.trim() !== "" ? 
-                // <>
                 <div className="searchResults">
                     <h2>Results</h2>
                     {showAllItems ? (
@@ -98,7 +92,6 @@ export default function SearchBar() {
                         </button>
                     </div>
                 </div>
-                // <Filters onSelected={handleFilterSelect} /></>
                 : null
             }
         </>

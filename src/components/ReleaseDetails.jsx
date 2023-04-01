@@ -38,7 +38,7 @@ export default function ReleaseDetails () {
         } catch (error) {
           console.error(error)
         }
-      }, [albumId, getCurrentAlbum, setPrice])
+      }, [albumId, getCurrentAlbum, setPrice, currentAlbum])
       
     
     const handleBuyButton = useCallback(() => {
@@ -75,7 +75,7 @@ export default function ReleaseDetails () {
                 confirmButton: 'sweetButton'
             }
         })
-    }, [currentAlbum, selectedItems])
+    }, [ selectedItems, albumId])
 
     return (
         <>

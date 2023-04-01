@@ -4,6 +4,35 @@ import * as spotifyAPI from '../api/spotify'
 export const SpotifyContext = createContext()
 export const useSpotify = () => useContext(SpotifyContext)
 
+const useAlbumPrices = (albumItems) => {
+  const [albumPrices, setAlbumPrices] = useState([])
+
+  useEffect(() => {
+    // Check if albumItems is empty
+    if (albumItems.length === 0) return
+
+    const storedPrices = JSON.parse(localStorage.getItem('albumPrices') || '[]')
+    const albumIdsInLocalStorage = new Set(storedPrices.map(p => p.id))
+
+    // Filter out albumItems that already have a price in localStorage
+    const albumsToPrice = albumItems.filter(album => !albumIdsInLocalStorage.has(album.id))
+    // Generate random prices for albums that don't have a price in localStorage
+    const albumItemsWithPrice = albumsToPrice.map((album) => {
+      const basePrice = 15
+      const rarityMultiplier = Math.random() * (3 - 1) + 1
+      const conditionMultiplier = Math.random() * (2 - 0.5) + 0.5
+      const price = Math.floor(basePrice * rarityMultiplier * conditionMultiplier)
+      return { id: album.id, price: `${price},95` }
+    })
+    
+    localStorage.setItem('albumPrices', JSON.stringify([...storedPrices, ...albumItemsWithPrice]))
+    setAlbumPrices([...storedPrices, ...albumItemsWithPrice])
+  }, [albumItems])
+
+  return albumPrices
+}
+
+
 export const SpotifyProvider = ({ children }) => {
   const [authVariables, setAuthVariables] = useState(null)
   const [error, setError] = useState()
@@ -15,36 +44,9 @@ export const SpotifyProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([])
   const [search, setSearch] = useState({})
 
-  // Generate random prices, adding albumItems to dependency array will cause infinite loop warning
-  const albumItems = newReleases.albums?.items || search.albums?.items || []
-  const useAlbumPrices = (albumItems) => {
-    const [albumPrices, setAlbumPrices] = useState([])
-  
-    useEffect(() => {
-      const storedPrices = JSON.parse(localStorage.getItem('albumPrices') || '[]')
-  
-      if (storedPrices.length > 0) {
-        setAlbumPrices(storedPrices)
-      } else {
-        const prices = []
-  
-        albumItems.forEach((album) => {
-          const basePrice = 10
-          const rarityMultiplier = Math.random() * (5 - 1) + 1
-          const conditionMultiplier = Math.random() * (2 - 0.5) + 0.5
-          const price = Math.floor(basePrice * rarityMultiplier * conditionMultiplier)
-          prices.push({ id: album.id, price: `${price},95` })
-        })
-  
-        setAlbumPrices(prices)
-        localStorage.setItem('albumPrices', JSON.stringify(prices))
-      }
-    }, [])
-  
-    return albumPrices
-  }
-  const albumPrices = useAlbumPrices(albumItems)
-
+  // Generate random prices
+  const albumItems = useMemo(() => search.albums?.items || newReleases.albums?.items || [], [search, newReleases])
+  const generatedAlbumPrices = useAlbumPrices(albumItems)
 
   const refreshSpotify = useCallback(async () => {
     try {
@@ -106,9 +108,9 @@ export const SpotifyProvider = ({ children }) => {
     }
   }, [])
 
-  const getSearch = useCallback(async (query, genre) => {
+  const getSearch = useCallback(async (query) => {
     try {
-      const data = await spotifyAPI.getSearch(encodeURIComponent(query), encodeURIComponent(genre))
+      const data = await spotifyAPI.getSearch(encodeURIComponent(query))
       setSearch(data)
       setError('')
     } catch (error) {
@@ -139,7 +141,7 @@ export const SpotifyProvider = ({ children }) => {
     setCartItems,
     getSearch,
     search,
-    albumPrices,
+    generatedAlbumPrices,
     error,
     loading,
   }), [
@@ -157,7 +159,7 @@ export const SpotifyProvider = ({ children }) => {
     setCartItems,
     getSearch,
     search,
-    albumPrices,
+    generatedAlbumPrices,
     error,
     loading,
   ]

@@ -120,11 +120,23 @@ export const SpotifyProvider = ({ children }) => {
     }
   }, [])
 
+  // Refresh Spotify auth variables if they are empty
   useEffect(() => {
     if (authVariables?.length === 0) {
       refreshSpotify()
     }
   }, [authVariables, refreshSpotify])
+
+  useEffect(() => {
+    // Get cartItems from localStorage
+    const itemsFromStorage = JSON.parse(localStorage.getItem('selectedItems'))
+
+    // Check if itemsFromStorage is not empty
+    if (itemsFromStorage && itemsFromStorage.length > 0) {
+      setCartItems(itemsFromStorage)
+      getAlbums(itemsFromStorage.map(item => item.id))
+    }
+  }, [getAlbums])
 
   const value = useMemo(() => ({
     authVariables,

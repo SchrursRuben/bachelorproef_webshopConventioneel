@@ -43,7 +43,7 @@ export default function ReleaseDetails () {
     
     const handleBuyButton = useCallback(() => {
         // Add new item to array
-        const newItem = {id: albumId, quantity: 1}
+        const newItem = {id: albumId, quantity: 1, price: price}
         // Check if ID already exists and increase the quantity if it does
         let updatedItems = []
         let found = false

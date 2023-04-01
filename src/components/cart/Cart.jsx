@@ -11,44 +11,20 @@ export default function Cart() {
   // Load cartItems
   useEffect(() => {
     try {
-      // Get cartItems
-      const itemsFromStorage = JSON.parse(localStorage.getItem('selectedItems'))
-      if (itemsFromStorage?.length !== 0) {
+      // Calculate the total number of items in the cart
+      calculateAmountOfItems()
+      // Calculate the total price of the cart
+      calculateTotalPrice()
+      // Reload cartItems
+      const itemsFromStorage = JSON.parse(localStorage.getItem('selectedItems')) || []
+      // Check if itemsFromStorage is not empty
+      if (itemsFromStorage && itemsFromStorage.length > 0) {
         setCartItems(itemsFromStorage)
-
-        getAlbums((itemsFromStorage?.map(item => {
-          return item.id
-        })))
+        getAlbums(itemsFromStorage.map(item => item.id))
       }
-      // Get Prices
-      const pricesFromStorage = JSON.parse(localStorage.getItem('albumPrices'))
-      // if (pricesFromStorage?.length !== 0) {
-      //   setCartItems(itemsFromStorage?.map(item => {
-      //     const priceCurrentAlbum = pricesFromStorage.find(album => album.id === item.id) || {}
-      //     if (priceCurrentAlbum) {
-      //       item.price = priceCurrentAlbum.price
-      //     }
-      //     return item
-      //   }))
-      // }
-      console.log(pricesFromStorage)
     } catch (error) {
       console.error(error)
     }
-  }, [getAlbums])
-
-  // Calculate the total price of the cart
-  const calculateTotalPrice = useCallback(() => {
-    if (!cartItems) {
-      return
-    }
-    let totalPrice = 0
-    cartItems.forEach(cartItem => {
-      totalPrice += cartItem.price * cartItem.quantity
-      console.log(cartItem.price)
-    })
-    setTotalPrice(totalPrice)
-    return totalPrice
   }, [cartItems])
 
   // Calculate the total number of items in the cart
@@ -61,16 +37,20 @@ export default function Cart() {
       totalAmount += cartItem.quantity
     })
     setAmountOfItems(totalAmount)
-    calculateTotalPrice()
-    return totalAmount
   }, [cartItems])
 
-  useEffect(() => {
+  // Calculate the total price of the cart
+  const calculateTotalPrice = useCallback(() => {
     if (!cartItems) {
       return
     }
-    calculateAmountOfItems()
-  }, [])
+    let totalPrice = 0
+    cartItems.forEach((cartItem) => {
+      totalPrice += parseFloat(cartItem.price.replace(",", ".")) * parseFloat(cartItem.quantity)
+    })
+    setTotalPrice(totalPrice.toFixed(2).replace(".", ","))
+  }, [cartItems])
+
 
   const handleRemoveItem = useCallback((itemId) => {
     if (!cartItems) {
@@ -100,8 +80,8 @@ export default function Cart() {
                 </div>
                 <div className='cartOverview'>
                   <h3>Overview</h3>
-                  <p>Number of items : {amountOfItems}</p>
-                  <p>Total Amount: {totalPrice}</p>
+                  <p>Number of items - {amountOfItems}</p>
+                  <p>Total Amount - € {totalPrice}</p>
                 </div>
               </div>
             </div>

@@ -4,9 +4,10 @@ import '../../css/cart/Cart.scss'
 import { useSpotify } from '../../contexts/SpotifyProvider'
 
 export default function Cart() {
-  const { cartItems, setCartItems, getAlbums } = useSpotify()
-  const [amountOfItems, setAmountOfItems] = useState(0)
+  const { cartItems, setCartItems, getAlbums, totalAmountOfItemsInCart, calculateAmountOfItems } = useSpotify()
+  // const [amountOfItems, setAmountOfItems] = useState(0)
   const [totalPrice, setTotalPrice] = useState(0)
+  const [cartItemsCount, setCartItemsCount] = useState(0)
 
   // Load cartItems
   useEffect(() => {
@@ -22,21 +23,16 @@ export default function Cart() {
         setCartItems(itemsFromStorage)
         getAlbums(itemsFromStorage.map(item => item.id))
       }
+      // Update cartItemsCount
+      setCartItemsCount(itemsFromStorage.length)
     } catch (error) {
       console.error(error)
     }
-  }, [cartItems])
-
-  // Calculate the total number of items in the cart
-  const calculateAmountOfItems = useCallback(() => {
-    if (!cartItems) {
-      return
-    }
-    let totalAmount = 0
-    cartItems.forEach(cartItem => {
-      totalAmount += cartItem.quantity
-    })
-    setAmountOfItems(totalAmount)
+  }, [cartItemsCount])
+  
+  useEffect(() => {
+    calculateAmountOfItems()
+    calculateTotalPrice()
   }, [cartItems])
 
   // Calculate the total price of the cart
@@ -63,24 +59,27 @@ export default function Cart() {
 
     // Update cartItems state
     setCartItems(updatedItems)
+    // Update cartItemsCount
+    setCartItemsCount(JSON.parse(localStorage.getItem('selectedItems')))
+
   }, [cartItems, setCartItems])
 
   return (
     <>
       {
-        cartItems ?
+        cartItems.length > 0 ?
           <div className='cartPageWrapper'>
             <div className='cart'>
               <h2>Cart</h2>
               <div className='cartDetails'>
                 <div className='cartItems'>
                   {cartItems.map(item => (
-                    <CartItem key={item.id} item={item} onRemove={handleRemoveItem} calculateAmountOfItems={calculateAmountOfItems} />
+                    <CartItem key={item.id} item={item} onRemove={handleRemoveItem} calculateAmountOfItems={calculateAmountOfItems}/>
                   ))}
                 </div>
                 <div className='cartOverview'>
                   <h3>Overview</h3>
-                  <p>Number of items - {amountOfItems}</p>
+                  <p>Number of items - {totalAmountOfItemsInCart}</p>
                   <p>Total Amount - € {totalPrice}</p>
                 </div>
               </div>

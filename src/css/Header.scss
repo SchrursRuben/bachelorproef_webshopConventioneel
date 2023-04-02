@@ -1,13 +1,14 @@
 @import 'App';
 
-header{
+header {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid $secondaryColor;
     padding: 0 $mediumM;
     height: $smallC;
     align-items: center;
-    a{
+
+    a {
         display: flex;
         align-items: center;
         border: 0;
@@ -17,39 +18,79 @@ header{
         height: min-content;
         border-bottom: 1px solid $primaryColor;
         border-top: 1px solid $primaryColor;
-        @each $property, $value in $headerFont {
+
+        @each $property,
+        $value in $headerFont {
             #{$property}: $value;
         }
+
         text-decoration: none;
         color: $secondaryColor;
         transition: all .3s ease-in-out;
     }
-    .logo{
+
+    .logo {
         height: inherit;
         display: flex;
         align-items: center;
     }
-    .logo:hover{
+
+    .logo:hover {
         cursor: pointer;
-        a{
+
+        a {
             padding: $xsmallM;
             border-bottom: 1px solid $secondaryColor;
         }
     }
-    .cartIcon{
-        display: flex;
-        align-items: center;
-        border-bottom: 1px solid $primaryColor;
-        border-top: 1px solid $primaryColor;
-        transition: all .3s ease-in-out;
-        svg{
-            fill: $secondaryColor;
+
+    .cart {
+        position: relative;
+
+        .cartIcon {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid $primaryColor;
+            border-top: 1px solid $primaryColor;
+            transition: all .3s ease-in-out;
+            svg {
+                fill: $secondaryColor;
+                transition: all .3s ease-in-out;
+            }
+        }
+
+        .cartBadge {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            color: $secondaryColor;
+            background-color: $primaryColor;
+            bottom: 18px;
+            left: 16px;
+            transition: all .3s ease-in-out;
+
+            @each $property,
+            $value in $h6Font {
+                #{$property}: $value;
+            }
         }
     }
-    .cartIcon:hover{
+    .cart:hover {
         cursor: pointer;
-        padding: $xsmallM;
-        border-bottom: 1px solid $secondaryColor;
+
+        .cartIcon {
+            cursor: pointer;
+            border-bottom: 1px solid $secondaryColor;
+            padding: $xsmallM;
+        }
+        .cartBadge {
+            cursor: pointer;
+            color: transparent;
+            background-color: transparent;
+        }
     }
 }
 
@@ -57,5 +98,10 @@ header{
 @media (min-width: 850px) {
     header {
         padding: 0 $xxlargeM;
+        // .cart{
+        //     .cartBadge{
+        //         right: 115px;
+        //     }
+        // }
     }
 }

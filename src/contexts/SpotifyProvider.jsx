@@ -24,7 +24,7 @@ const useAlbumPrices = (albumItems) => {
       const price = Math.floor(basePrice * rarityMultiplier * conditionMultiplier)
       return { id: album.id, price: `${price},95` }
     })
-    
+
     localStorage.setItem('albumPrices', JSON.stringify([...storedPrices, ...albumItemsWithPrice]))
     setAlbumPrices([...storedPrices, ...albumItemsWithPrice])
   }, [albumItems])
@@ -41,8 +41,9 @@ export const SpotifyProvider = ({ children }) => {
   const [genres, setGenres] = useState({})
   const [currentAlbum, setCurrentAlbum] = useState({})
   const [albums, setAlbums] = useState({})
-  const [cartItems, setCartItems] = useState([])
+  const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem('selectedItems')) || [])
   const [search, setSearch] = useState({})
+  const [totalAmountOfItemsInCart, setTotalAmountOfItemsInCart] = useState(0)
 
   // Generate random prices
   const albumItems = useMemo(() => search.albums?.items || newReleases.albums?.items || [], [search, newReleases])
@@ -67,21 +68,21 @@ export const SpotifyProvider = ({ children }) => {
       setError('')
     } catch (error) {
       setError(error)
-    } finally{
+    } finally {
       setLoading(false)
     }
   }, [])
 
   const getGenres = useCallback(async (link) => {
-      try {
-        const data = await spotifyAPI.getGenres(link)
-        setGenres(data)
-        setError('')
-      } catch (error) {
-        setError(error)
-      } finally{
-        setLoading(false)
-      }
+    try {
+      const data = await spotifyAPI.getGenres(link)
+      setGenres(data)
+      setError('')
+    } catch (error) {
+      setError(error)
+    } finally {
+      setLoading(false)
+    }
   }, [])
 
   const getCurrentAlbum = useCallback(async (albumId) => {
@@ -91,7 +92,7 @@ export const SpotifyProvider = ({ children }) => {
       setError('')
     } catch (error) {
       setError(error)
-    } finally{
+    } finally {
       setLoading(false)
     }
   }, [])
@@ -103,7 +104,7 @@ export const SpotifyProvider = ({ children }) => {
       setError('')
     } catch (error) {
       setError(error)
-    } finally{
+    } finally {
       setLoading(false)
     }
   }, [])
@@ -115,7 +116,7 @@ export const SpotifyProvider = ({ children }) => {
       setError('')
     } catch (error) {
       setError(error)
-    } finally{
+    } finally {
       setLoading(false)
     }
   }, [])
@@ -136,7 +137,19 @@ export const SpotifyProvider = ({ children }) => {
       setCartItems(itemsFromStorage)
       getAlbums(itemsFromStorage.map(item => item.id))
     }
-  }, [getAlbums])
+  }, [newReleases])
+
+  // Calculate the total number of items in the cart
+  const calculateAmountOfItems = useCallback(() => {
+    if (!cartItems) {
+      return
+    }
+    let totalAmount = 0
+    cartItems.forEach(cartItem => {
+      totalAmount += cartItem.quantity
+    })
+    setTotalAmountOfItemsInCart(totalAmount)
+  }, [cartItems, setTotalAmountOfItemsInCart])
 
   const value = useMemo(() => ({
     authVariables,
@@ -154,6 +167,8 @@ export const SpotifyProvider = ({ children }) => {
     getSearch,
     search,
     generatedAlbumPrices,
+    calculateAmountOfItems,
+    totalAmountOfItemsInCart,
     error,
     loading,
   }), [
@@ -172,6 +187,8 @@ export const SpotifyProvider = ({ children }) => {
     getSearch,
     search,
     generatedAlbumPrices,
+    calculateAmountOfItems,
+    totalAmountOfItemsInCart,
     error,
     loading,
   ]

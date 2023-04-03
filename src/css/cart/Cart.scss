@@ -39,6 +39,12 @@
                     #{$property}: $value;
                 }
             }
+            .noItems{
+                color: $secondaryColor;
+                @each $property, $value in $h2Font {
+                    #{$property}: $value;
+                }
+            }
         }
     }
 }

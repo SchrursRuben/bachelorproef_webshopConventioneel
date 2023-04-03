@@ -29,7 +29,7 @@ export default function Cart() {
       console.error(error)
     }
   }, [cartItemsCount])
-  
+
   useEffect(() => {
     calculateAmountOfItems()
     calculateTotalPrice()
@@ -74,7 +74,7 @@ export default function Cart() {
               <div className='cartDetails'>
                 <div className='cartItems'>
                   {cartItems.map(item => (
-                    <CartItem key={item.id} item={item} onRemove={handleRemoveItem} calculateAmountOfItems={calculateAmountOfItems}/>
+                    <CartItem key={item.id} item={item} onRemove={handleRemoveItem} calculateAmountOfItems={calculateAmountOfItems} />
                   ))}
                 </div>
                 <div className='cartOverview'>
@@ -90,9 +90,8 @@ export default function Cart() {
             <div className='cart'>
               <h2>Cart</h2>
               <div className='cartDetails'>
-                <h3>No Items</h3>
-                <div className='cartOverview'>
-                  <h3>Overview</h3>
+                <div className='noItems'>
+                  <h3>No Items In Cart</h3>
                 </div>
               </div>
             </div>

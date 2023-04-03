@@ -32,6 +32,10 @@ const useAlbumPrices = (albumItems) => {
   return albumPrices
 }
 
+// set timeout to remove item after 24 hours
+setTimeout(function () {
+  localStorage.removeItem('albumPrices')
+}, 24 * 60 * 60 * 1000) // 24 hours in milliseconds
 
 export const SpotifyProvider = ({ children }) => {
   const [authVariables, setAuthVariables] = useState(null)

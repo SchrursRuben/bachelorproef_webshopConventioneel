@@ -37,7 +37,6 @@ export default function ReleaseDetails() {
             }
             // Calculate total amount of items in cart
             calculateAmountOfItems()
-            console.log('yes')
         } catch (error) {
             console.error(error)
         }

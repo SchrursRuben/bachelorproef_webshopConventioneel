@@ -1,26 +1,33 @@
 @import 'App';
 
 /* Mobile */
-.releaseDetailsWrapper{
-    margin: 0 2rem;
-    .releaseDetails{
-        .releaseTitleAndArtistsAndSpotifyButton{
+.releaseDetailsWrapper {
+    margin: 0 2rem 2rem;
+
+    .releaseDetails {
+        .releaseTitleAndArtistsAndSpotifyButton {
             color: $secondaryColor;
-            .releaseTitleAndSpotifyButton{
+
+            .releaseTitleAndSpotifyButton {
                 display: flex;
-                h2{
+
+                h2 {
                     margin: 0;
                     padding: $largeM 0 $mediumM;
                     border-bottom: 1px solid $secondaryColor;
                     width: 100%;
-                    @each $property, $value in $h2Font {
+
+                    @each $property,
+                    $value in $h2Font {
                         #{$property}: $value;
                     }
+
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
                 }
-                .spotifyButton{
+
+                .spotifyButton {
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -35,54 +42,69 @@
                     background-color: $primaryColor;
                     color: $spotifyGreen;
                     transition: all .3s ease-in-out;
-                    p{
+
+                    p {
                         margin: 0;
                         width: max-content;
                         display: none;
-                        @each $property, $value in $h2Font {
+
+                        @each $property,
+                        $value in $h2Font {
                             #{$property}: $value;
                         }
                     }
-                    img{
+
+                    img {
                         height: $xsmallC;
                         width: fit-content;
                     }
                 }
-                .spotifyButton:hover{
+
+                .spotifyButton:hover {
                     cursor: pointer;
                 }
             }
-            .releaseArtits{
+
+            .releaseArtits {
                 display: flex;
                 gap: $smallM;
-                h4{
+
+                h4 {
                     margin: $smallM 0 $mediumM;
-                    @each $property, $value in $h4Font {
+
+                    @each $property,
+                    $value in $h4Font {
                         #{$property}: $value;
                     }
                 }
             }
         }
-        .releaseCoverArtInfoBuyButtonAndTracks{
-            .releaseCoverArt{
-                    img{
-                        width: 100%;
+
+        .releaseCoverArtInfoBuyButtonAndTracks {
+            .releaseCoverArt {
+                img {
+                    width: 100%;
                 }
             }
         }
-        .releaseInfoBuyButtonAndTracks{
-            .releaseInfo{
-                .releasePriceAndType{
+
+        .releaseInfoBuyButtonAndTracks {
+            .releaseInfo {
+                .releasePriceAndType {
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
                     color: $secondaryColor;
-                    .releasePrice{
-                        @each $property, $value in $h4Font {
+
+                    .releasePrice {
+
+                        @each $property,
+                        $value in $h4Font {
                             #{$property}: $value;
                         }
                     }
-                    .releaseType{
+
+                    .releaseType {
                         width: $smallC;
                         height: $xsmallC;
                         margin: 0;
@@ -91,100 +113,130 @@
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        @each $property, $value in $h4Font {
+
+                        @each $property,
+                        $value in $h4Font {
                             #{$property}: $value;
                         }
                     }
                 }
-                .releaseDate{
+
+                .releaseDate {
                     text-align: end;
                     color: $secondaryColor;
-                    @each $property, $value in $h4Font {
+
+                    @each $property,
+                    $value in $h4Font {
                         #{$property}: $value;
                     }
-                    p{
+
+                    p {
                         margin: $mediumM 0 0;
                     }
                 }
-                .releaseLabelInfo{
+
+                .releaseLabelInfo {
                     display: flex;
                     justify-content: space-between;
                     margin: $mediumM 0;
                     border: 1px solid $secondaryColor;
                     color: $secondaryColor;
                     align-items: center;
-                    .labelText{
+
+                    .labelText {
                         margin: 0;
                         padding: $xsmallM $smallM;
                         text-align: center;
-                        @each $property, $value in $h4Font {
+
+                        @each $property,
+                        $value in $h4Font {
                             #{$property}: $value;
                         }
                     }
-                    .labelName{
+
+                    .labelName {
                         margin: 0;
                         padding: $xsmallM $smallM;
                         text-align: center;
                         width: 100%;
                         border-left: 1px solid $secondaryColor;
-                        @each $property, $value in $h4Font {
+
+                        @each $property,
+                        $value in $h4Font {
                             #{$property}: $value;
                         }
                     }
                 }
             }
-            .releaseBuyButtonAndTracks{
-                .buyButton{
+
+            .releaseBuyButtonAndTracks {
+                .buyButton {
                     display: flex;
                     justify-content: space-evenly;
                     align-items: center;
                     width: 100%;
-                    height: $smallC;    
+                    height: $smallC;
                     background-color: $secondaryColor;
                     color: $primaryColor;
                     border-bottom: 1px solid $secondaryColor;
                     transition: all .3s ease-in-out;
-                    h2{
-                        @each $property, $value in $addToCartFont {
+
+                    h2 {
+
+                        @each $property,
+                        $value in $addToCartFont {
                             #{$property}: $value;
-                        }   
+                        }
                     }
-                    svg{
+
+                    svg {
                         fill: $primaryColor;
                     }
                 }
-                .buyButton:hover{
+
+                .buyButton:hover {
                     cursor: pointer;
                     background-color: $primaryColor;
                     color: $secondaryColor;
-                    svg{
+
+                    svg {
                         fill: $secondaryColor;
                     }
                 }
-                .extraTitle{
-                    h2{
+
+                .extraTitle {
+                    h2 {
                         color: $secondaryColor;
                         margin: $mediumM 0 0 0;
                         padding: $mediumM;
                         border: 1px solid $secondaryColor;
                         text-align: center;
-                        @each $property, $value in $h5Font {
+
+                        @each $property,
+                        $value in $h5Font {
                             #{$property}: $value;
                         }
                     }
                 }
-                .releaseTracks{
+
+                .releaseTracks {
                     color: $secondaryColor;
-                    h2{
+
+                    h2 {
                         margin: 0;
                         padding: $largeM 0 $smallM;
                         border-bottom: 1px solid $secondaryColor;
-                        @each $property, $value in $h2Font {
+
+                        @each $property,
+                        $value in $h2Font {
                             #{$property}: $value;
                         }
                     }
-                    p{
-                        @each $property, $value in $tracksFont {
+
+                    p {
+
+                        @each $property,
+                        $value in $tracksFont {
                             #{$property}: $value;
                         }
                     }
@@ -193,31 +245,38 @@
         }
     }
 }
-.sweetContainer{
-    .swal2-modal{
+
+.sweetContainer {
+    .swal2-modal {
         background-color: $primaryColor;
         border: 3px solid $secondaryColor;
         border-radius: 0;
-        .sweetTitle{
+
+        .sweetTitle {
             color: $secondaryColor;
-            @each $property, $value in $h4Font {
+
+            @each $property,
+            $value in $h4Font {
                 #{$property}: $value;
             }
         }
-        .sweetButton{
+
+        .sweetButton {
             background-color: $secondaryColor;
             color: $primaryColor;
             border-bottom: 1px solid $secondaryColor;
             border-radius: 0;
             transition: all .3s ease-in-out;
         }
-        .sweetButton:hover{
+
+        .sweetButton:hover {
             cursor: pointer;
             background-color: $primaryColor;
             color: $secondaryColor;
             background-image: none;
         }
-        .sweetButton:focus{
+
+        .sweetButton:focus {
             outline: none;
             box-shadow: none;
         }
@@ -228,24 +287,29 @@
 @media (min-width: 1200px) {
     .releaseDetailsWrapper {
         margin: 0 $xxlargeM $xlargeM;
-        .releaseDetails{
-            .releaseTitleAndArtistsAndSpotifyButton{
-                .releaseTitleAndSpotifyButton{
-                    .spotifyButton{
+
+        .releaseDetails {
+            .releaseTitleAndArtistsAndSpotifyButton {
+                .releaseTitleAndSpotifyButton {
+                    .spotifyButton {
                         width: 20%;
-                        p{
+
+                        p {
                             display: block;
                         }
                     }
-                    .spotifyButton:hover{
+
+                    .spotifyButton:hover {
                         width: 30%;
                     }
                 }
             }
-            .releaseCoverArtInfoBuyButtonAndTracks{
+
+            .releaseCoverArtInfoBuyButtonAndTracks {
                 display: flex;
                 gap: $xlargeM;
-                .releaseInfoBuyButtonAndTracks{
+
+                .releaseInfoBuyButtonAndTracks {
                     flex: 1;
                     display: flex;
                     flex-direction: column;
@@ -254,4 +318,4 @@
             }
         }
     }
-  }
+}

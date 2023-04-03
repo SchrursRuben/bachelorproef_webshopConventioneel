@@ -1,18 +1,28 @@
 @import 'App';
 
-footer{
+footer {
     display: flex;
-    background-color: $secondaryColor;
+    background-color: $tertiaryColor;
     padding: 0 $mediumM;
-    button{
-        padding: 0;
-        border: 0;
-        background-color: $secondaryColor;
-        color: $primaryColor;
-        height: $smallC;
-        p{
-            margin: 0;
-            padding: 0;   
+    justify-content: end;
+    align-items: center;
+    height: $smallC;
+    p {
+        @each $property,
+        $value in $h5Font {
+            #{$property}: $value;
+        }
+        a {
+            text-decoration: none;
+
+            @each $property,
+            $value in $h5Font {
+                #{$property}: $value;
+            }
+
+            &:hover {
+                text-decoration: underline;
+            }
         }
     }
 }
@@ -22,4 +32,4 @@ footer{
     footer {
         padding: 0 $xxlargeM;
     }
-  }
+}

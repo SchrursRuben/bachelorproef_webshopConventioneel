@@ -8,6 +8,7 @@ export default function CartItem({ item, onRemove, calculateAmountOfItems }) {
     const [release, setRelease] = useState({})
     const [quantity, setQuantity] = useState(item.quantity)
     const [price, setPrice] = useState(item.price)
+    const [customSelected, setCustomSelected] = useState(false)
 
     const getRelease = useCallback(() => {
         try {
@@ -38,6 +39,10 @@ export default function CartItem({ item, onRemove, calculateAmountOfItems }) {
                 }
             }
 
+            // Get customSelected
+            const customSelectedFromStorage = JSON.parse(localStorage.getItem('customSelected')) || false
+            setCustomSelected(customSelectedFromStorage)
+
         } catch (error) {
             console.error(error)
         }
@@ -55,18 +60,24 @@ export default function CartItem({ item, onRemove, calculateAmountOfItems }) {
     }, [selectedItems, item, onRemove, calculateAmountOfItems])
 
     const handleQuantityChange = useCallback((event) => {
-        const value = event.target.value
+        let value = event.target.value
+        let customQuantity = null
         if (value === 'custom') {
-            const customQuantity = window.prompt('Enter custom quantity:')
+            customQuantity = parseInt(window.prompt('Enter custom quantity:'))
             if (customQuantity) {
-                setQuantity(parseInt(customQuantity))
+                setQuantity(customQuantity)
                 const updatedItems = JSON.parse(localStorage.getItem('selectedItems')).map((i) => {
                     if (i.id === item.id) {
-                        i.quantity = parseInt(customQuantity)
+                        i.quantity = customQuantity
                     }
                     return i
                 })
                 localStorage.setItem('selectedItems', JSON.stringify(updatedItems))
+                // Set customSelected to true
+                localStorage.setItem('customSelected', JSON.stringify(true))
+                setCustomSelected(true)
+            } else {
+                return
             }
         } else {
             const newQuantity = Number(value)
@@ -78,13 +89,16 @@ export default function CartItem({ item, onRemove, calculateAmountOfItems }) {
                 return i
             })
             localStorage.setItem('selectedItems', JSON.stringify(updatedItems))
+            // Set customSelected to false
+            localStorage.setItem('customSelected', JSON.stringify(false))
+            setCustomSelected(false)
         }
         setCartItems((prev) => {
             const updatedPrev = prev.map((i) => {
                 if (i.id === item.id) {
                     return {
                         ...i,
-                        quantity: Number(value)
+                        quantity: customQuantity || Number(value)
                     }
                 }
                 return i
@@ -94,16 +108,6 @@ export default function CartItem({ item, onRemove, calculateAmountOfItems }) {
         // Recalculate the amount of items
         calculateAmountOfItems()
     }, [cartItems])
-
-    const handleCustomQuantity = useCallback(() => {
-        if (quantity) {
-            if (quantity <= 5) {
-                return 'Custom'
-            } else {
-                return quantity.toString()
-            }
-        }
-    }, [quantity])
 
     return (
         <div className='cartItem'>
@@ -124,7 +128,10 @@ export default function CartItem({ item, onRemove, calculateAmountOfItems }) {
                                 <option value="3">3</option>
                                 <option value="4">4</option>
                                 <option value="5">5</option>
-                                <option value="custom">{handleCustomQuantity()}</option>
+                                {
+                                    customSelected ? <option value={quantity}>{quantity}</option> : null
+                                }
+                                <option value="custom">Custom</option>
                             </select>
                             <button className='removeButton' onClick={handleRemoveButton}>
                                 <p>REMOVE</p>

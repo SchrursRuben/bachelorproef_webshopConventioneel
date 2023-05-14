@@ -3,21 +3,21 @@
 header {
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid $secondaryColor;
+    border-bottom: 1px solid $primaryColor;
     padding: 0 $mediumM;
     height: $smallC;
     align-items: center;
-
+    background-color: $secondaryColor;
     a {
         display: flex;
         align-items: center;
         border: 0;
-        background-color: $primaryColor;
+        background-color: $secondaryColor;
         margin: 0;
         padding: 0;
         height: min-content;
-        border-bottom: 1px solid $primaryColor;
-        border-top: 1px solid $primaryColor;
+        border-bottom: 1px solid $secondaryColor;
+        border-top: 1px solid $secondaryColor;
 
         @each $property,
         $value in $headerFont {
@@ -25,7 +25,7 @@ header {
         }
 
         text-decoration: none;
-        color: $secondaryColor;
+        color: $primaryColor;
         transition: all .3s ease-in-out;
     }
 
@@ -40,7 +40,7 @@ header {
 
         a {
             padding: $xsmallM;
-            border-bottom: 1px solid $secondaryColor;
+            border-bottom: 1px solid $primaryColor;
         }
     }
 
@@ -50,11 +50,11 @@ header {
         .cartIcon {
             display: flex;
             align-items: center;
-            border-bottom: 1px solid $primaryColor;
-            border-top: 1px solid $primaryColor;
+            border-bottom: 1px solid $secondaryColor;
+            border-top: 1px solid $secondaryColor;
             transition: all .3s ease-in-out;
             svg {
-                fill: $secondaryColor;
+                fill: $primaryColor;
                 transition: all .3s ease-in-out;
             }
         }
@@ -66,8 +66,8 @@ header {
             justify-content: center;
             width: 18px;
             height: 18px;
-            color: $secondaryColor;
-            background-color: $primaryColor;
+            color: $primaryColor;
+            background-color: $secondaryColor;
             bottom: 18px;
             left: 16px;
             transition: all .3s ease-in-out;
@@ -83,7 +83,7 @@ header {
 
         .cartIcon {
             cursor: pointer;
-            border-bottom: 1px solid $secondaryColor;
+            border-bottom: 1px solid $primaryColor;
             padding: $xsmallM;
         }
         .cartBadge {

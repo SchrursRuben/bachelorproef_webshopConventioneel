@@ -1,5 +1,5 @@
 import '../css/ReleaseDetails.scss'
-import { useParams } from 'react-router'
+import { useParams, useNavigate } from 'react-router'
 import { useSpotify } from '../contexts/SpotifyProvider'
 import React, { useCallback, useState, useEffect } from 'react'
 import Swal from 'sweetalert2'
@@ -7,9 +7,10 @@ import SpotifyLogo from '../images/spotify/Spotify_Icon_RGB_Green.png'
 
 export default function ReleaseDetails() {
     const { albumId } = useParams()
-    const { currentAlbum, getCurrentAlbum, setCartItems, calculateAmountOfItems } = useSpotify()
+    const { currentAlbum, getCurrentAlbum, setCartItems, calculateAmountOfItems, setGoBack } = useSpotify()
     const [selectedItems, setSelectedItems] = useState([])
     const [price, setPrice] = useState(0)
+    const navigate = useNavigate()
 
     // CartIcon
     const svgStyle = {
@@ -21,6 +22,7 @@ export default function ReleaseDetails() {
 
     useEffect(() => {
         try {
+            setGoBack(true)
             getCurrentAlbum(albumId)
 
             // Get CartItems
@@ -71,13 +73,26 @@ export default function ReleaseDetails() {
         Swal.fire({
             title: 'Item added to cart!',
             showConfirmButton: true,
+            confirmButtonText: 'Go to cart',
+            showDenyButton: true,
+            denyButtonText: 'Continue shopping',
+            reverseButtons: true,
             customClass: {
                 container: 'sweetContainer',
                 title: 'sweetTitle',
-                confirmButton: 'sweetButton'
+                confirmButton: 'sweetConfirmButton',
+                denyButton: 'sweetDenyButton'
+            },
+        }).then((result) => {
+            if (result.isConfirmed) {
+                handleCart()
             }
         })
     }, [selectedItems, albumId])
+
+    const handleCart = useCallback(() => {
+        navigate(`/cart`)
+    }, [navigate])
 
     const handleSpotifyButton = useCallback(() => {
         window.open(currentAlbum?.external_urls?.spotify, '_blank')

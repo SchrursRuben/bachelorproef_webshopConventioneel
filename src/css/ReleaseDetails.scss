@@ -261,22 +261,41 @@
             }
         }
 
-        .sweetButton {
+        .sweetConfirmButton {
             background-color: $secondaryColor;
             color: $primaryColor;
-            border-bottom: 1px solid $secondaryColor;
             border-radius: 0;
             transition: all .3s ease-in-out;
         }
 
-        .sweetButton:hover {
+        .sweetConfirmButton:hover {
             cursor: pointer;
             background-color: $primaryColor;
             color: $secondaryColor;
             background-image: none;
         }
 
-        .sweetButton:focus {
+        .sweetConfirmButton:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        .sweetDenyButton {
+            background-color: $primaryColor;
+            color: $secondaryColor;
+            border-radius: 0;
+            border: 1px solid $secondaryColor;
+            transition: all .3s ease-in-out;
+        }
+
+        .sweetDenyButton:hover {
+            cursor: pointer;
+            background-color: $secondaryColor;
+            color: $primaryColor;
+            background-image: none;
+        }
+
+        .sweetDenyButton:focus {
             outline: none;
             box-shadow: none;
         }

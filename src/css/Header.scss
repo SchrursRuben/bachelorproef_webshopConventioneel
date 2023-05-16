@@ -16,8 +16,8 @@ header {
         margin: 0;
         padding: 0;
         height: min-content;
-        border-bottom: 1px solid $secondaryColor;
-        border-top: 1px solid $secondaryColor;
+        // border-bottom: 1px solid $secondaryColor;
+        // border-top: 1px solid $secondaryColor;
 
         @each $property,
         $value in $headerFont {
@@ -33,13 +33,21 @@ header {
         height: inherit;
         display: flex;
         align-items: center;
+
+        .backButton {
+            border-bottom: 1px solid $secondaryColor;
+            background-color: $primaryColor;
+            padding: $smallM;
+            color: $secondaryColor;
+        }
     }
 
     .logo:hover {
         cursor: pointer;
-
-        a {
+        .backButton {
             padding: $xsmallM;
+            background-color: $secondaryColor;
+            color: $primaryColor;
             border-bottom: 1px solid $primaryColor;
         }
     }

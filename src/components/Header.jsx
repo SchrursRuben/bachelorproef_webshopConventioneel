@@ -5,7 +5,7 @@ import { useSpotify } from '../contexts/SpotifyProvider'
 
 export default function Header() {
     const navigate = useNavigate()
-    const { totalAmountOfItemsInCart, calculateAmountOfItems } = useSpotify()
+    const { totalAmountOfItemsInCart, calculateAmountOfItems, goBack } = useSpotify()
 
     const svgStyle = {
         width: "24px",
@@ -26,7 +26,13 @@ export default function Header() {
         <>
             <header className='header'>
                 <div className="logo">
-                    <a href='/'>STATIC</a>
+                    {
+                        goBack ? (
+                            <a className='backButton' href='/'>GO BACK</a>
+                        ) : (
+                            <a className='logobutton' href='/'>STATIC</a>
+                        )
+                    }
                 </div>
                 <div className='cart'>
                     <div className="cartBadge">{totalAmountOfItemsInCart}</div>

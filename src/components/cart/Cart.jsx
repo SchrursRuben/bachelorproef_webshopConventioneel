@@ -4,7 +4,7 @@ import '../../css/cart/Cart.scss'
 import { useSpotify } from '../../contexts/SpotifyProvider'
 
 export default function Cart() {
-  const { cartItems, setCartItems, getAlbums, totalAmountOfItemsInCart, calculateAmountOfItems } = useSpotify()
+  const { cartItems, setCartItems, getAlbums, totalAmountOfItemsInCart, calculateAmountOfItems, setGoBack } = useSpotify()
   // const [amountOfItems, setAmountOfItems] = useState(0)
   const [totalPrice, setTotalPrice] = useState(0)
   const [cartItemsCount, setCartItemsCount] = useState(0)
@@ -31,6 +31,7 @@ export default function Cart() {
   }, [cartItemsCount])
 
   useEffect(() => {
+    setGoBack(true)
     calculateAmountOfItems()
     calculateTotalPrice()
   }, [cartItems])

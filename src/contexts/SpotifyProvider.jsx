@@ -48,6 +48,7 @@ export const SpotifyProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem('selectedItems')) || [])
   const [search, setSearch] = useState({})
   const [totalAmountOfItemsInCart, setTotalAmountOfItemsInCart] = useState(0)
+  const [goBack, setGoBack] = useState(false)
 
   // Generate random prices
   const albumItems = useMemo(() => search.albums?.items || newReleases.albums?.items || [], [search, newReleases])
@@ -173,6 +174,8 @@ export const SpotifyProvider = ({ children }) => {
     generatedAlbumPrices,
     calculateAmountOfItems,
     totalAmountOfItemsInCart,
+    goBack,
+    setGoBack,
     error,
     loading,
   }), [
@@ -193,6 +196,8 @@ export const SpotifyProvider = ({ children }) => {
     generatedAlbumPrices,
     calculateAmountOfItems,
     totalAmountOfItemsInCart,
+    goBack,
+    setGoBack,
     error,
     loading,
   ]

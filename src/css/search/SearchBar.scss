@@ -1,6 +1,6 @@
 @import '../App';
 
-.searchBar{
+.searchBar {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -8,9 +8,11 @@
     border-bottom: 1px solid $secondaryColor;
     padding: 0 $mediumM;
     cursor: text;
-    .searchField{
+
+    .searchField {
         width: 100%;
-        input{
+
+        input {
             width: 95%;
             height: 100%;
             margin: 0;
@@ -21,66 +23,112 @@
             color: $secondaryColor;
             background-color: $primaryColor;
         }
-        input::placeholder{
+
+        input::placeholder {
             font-family: 'Montserrat';
             color: $secondaryColor;
         }
-        input:focus{
+
+        input:focus {
             outline: none;
             border-left: 0px;
             border-bottom: 1px solid $secondaryColor;
             padding: $smallM;
             transition: all .3s ease;
         }
+
         input:focus::placeholder {
             color: transparent;
-          }
+        }
     }
-    .icon{
-        svg{
+
+    .icon {
+        svg {
             fill: $secondaryColor;
         }
     }
 }
-.searchResults{
+
+.searchResults {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: $mediumM;
     border-bottom: 1px solid $secondaryColor;
     padding-bottom: $mediumM;
-    h2{
-        width: $largeC;
-        height: $smallC;
-        margin: $mediumM 0;
-        border-bottom: 1px solid $secondaryColor;
-        text-align: center;
-        line-height: 37px;
-        color: $secondaryColor;
-        @each $property, $value in $h2Font {
-            #{$property}: $value;
-          }
+    margin: 0 $mediumM $mediumM;
+    .searchResultsHeader {
+        width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
+        h2 {
+            width: $largeC;
+            height: $smallC;
+            margin: $mediumM 0;
+            border-bottom: 1px solid $secondaryColor;
+            text-align: center;
+            line-height: 37px;
+            color: $secondaryColor;
+
+            @each $property,
+            $value in $h2Font {
+                #{$property}: $value;
+            }
+            display: flex;
+            align-items: center;
+        }
+
+        .clearButton {
+            margin: $mediumM;
+            border: 0;
+            border-top: 1px solid $primaryColor;
+            border-bottom: 1px solid $secondaryColor;
+            height: $smallC;
+            width: $mediumC;
+            background-color: $primaryColor;
+            transition: all .3s ease-in-out;
+            p {
+                color: $secondaryColor;
+
+                @each $property,
+                $value in $h2Font {
+                    #{$property}: $value;
+                }
+            }
+        }
+        .clearButton:hover {
+            cursor: pointer;
+        }
     }
-    .showMoreDiv{
+
+    .results {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .showMoreDiv {
         display: flex;
         justify-content: center;
         width: 100%;
-        .showMoreButton{
+        
+        .showMoreButton {
             border: 0;
             background-color: $primaryColor;
             color: $secondaryColor;
             border-bottom: 1px solid $primaryColor;
             padding: $xsmallM 0;
             border-top: 1px solid $primaryColor;
-            @each $property, $value in $h5Font {
+
+            @each $property,
+            $value in $h5Font {
                 #{$property}: $value;
             }
+
             transition: all .3s ease-in-out;
         }
-        .showMoreButton:hover{
+
+        .showMoreButton:hover {
             cursor: pointer;
             padding: $xsmallM;
             border-bottom: 1px solid $secondaryColor;
@@ -90,20 +138,33 @@
 
 /* Desktop */
 @media (min-width: 850px) {
-    .searchBar{
+    .searchBar {
         padding: 0 $xxlargeM;
     }
-    .searchResults{
-        flex-direction: row;
+
+    .searchResults {
         justify-content: space-evenly;
         flex-wrap: wrap;
         gap: $largeM;
         margin: 0 $mediumC;
-        h2{
-            width: 100%;
-            justify-content: flex-start;
+
+        .searchResultsHeader {
+            h2 {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            .clearButton:hover{
+                width: 20%;
+            }
         }
-        .showMoreDiv{
+
+        .results {
+            flex-direction: row;
+            gap: $mediumM;
+            flex-wrap: wrap;
+        }
+
+        .showMoreDiv {
             justify-content: flex-end;
         }
     }

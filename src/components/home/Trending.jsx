@@ -5,7 +5,7 @@ import { useSpotify } from '../../contexts/SpotifyProvider'
 
 
 export default function Trending() {
-  const { newReleases, getNewReleases } = useSpotify()
+  const { newReleases, getNewReleases, setGoBack } = useSpotify()
   const [ showAllItems, setShowAllItems ] = useState(false)
 
   const handleShowMore = () => {
@@ -15,6 +15,8 @@ export default function Trending() {
   useEffect(() => {
     try {
       getNewReleases()
+
+      setGoBack(false)
     } catch (error) {
       console.error(error)
     }

@@ -3,7 +3,6 @@ import '../../css/home/Trending.scss'
 import ReleaseItem from './ReleaseItem'
 import { useSpotify } from '../../contexts/SpotifyProvider'
 
-
 export default function Trending() {
   const { newReleases, getNewReleases, setGoBack } = useSpotify()
   const [ showAllItems, setShowAllItems ] = useState(false)

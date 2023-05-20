@@ -1,5 +1,6 @@
 {
   "name": "webshop_conventioneel",
+  "homepage": "https://bachelorproef-webshop-conventioneel.vercel.app/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -1,5 +1,4 @@
 {
-    "homepage": "https://bachelorproef-webshop-conventioneel.vercel.app/",
     "routes": [
         {
             "src": "/(.*)",

@@ -4,7 +4,7 @@ import { useSpotify } from '../../contexts/SpotifyProvider'
 
 export default function CartItem({ item, onRemove, calculateAmountOfItems }) {
     const [selectedItems, setSelectedItems] = useState([])
-    const { albums, setCartItems, cartItems } = useSpotify()
+    const { albums, setCartItems } = useSpotify()
     const [release, setRelease] = useState({})
     const [quantity, setQuantity] = useState(item.quantity)
     const [price, setPrice] = useState(item.price)
@@ -107,7 +107,7 @@ export default function CartItem({ item, onRemove, calculateAmountOfItems }) {
         })
         // Recalculate the amount of items
         calculateAmountOfItems()
-    }, [cartItems])
+    }, [setCartItems, item, calculateAmountOfItems])
 
     return (
         <div className='cartItem'>

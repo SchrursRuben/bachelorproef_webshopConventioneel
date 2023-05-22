@@ -42,8 +42,15 @@ export default function ReleaseDetails() {
         } catch (error) {
             console.error(error)
         }
-    }, [albumId, calculateAmountOfItems])
+    }, [albumId, calculateAmountOfItems, currentAlbum, getCurrentAlbum, setGoBack])
 
+    const handleCart = useCallback(() => {
+        navigate(`/cart`)
+    }, [navigate])
+
+    const handleSpotifyButton = useCallback(() => {
+        window.open(currentAlbum?.external_urls?.spotify, '_blank')
+    }, [currentAlbum])
 
     const handleBuyButton = useCallback(() => {
         // Add new item to array
@@ -88,15 +95,7 @@ export default function ReleaseDetails() {
                 handleCart()
             }
         })
-    }, [selectedItems, albumId])
-
-    const handleCart = useCallback(() => {
-        navigate(`/cart`)
-    }, [navigate])
-
-    const handleSpotifyButton = useCallback(() => {
-        window.open(currentAlbum?.external_urls?.spotify, '_blank')
-    }, [currentAlbum])
+    }, [selectedItems, albumId, price, setCartItems, handleCart])
 
     return (
         <>

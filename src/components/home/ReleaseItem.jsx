@@ -16,7 +16,7 @@ export default function ReleaseItem( { albumObject } ) {
         // Get Price
         const priceCurrentAlbum = generatedAlbumPrices.find(item => item.id === albumObject?.id) || {}
         setPrice(priceCurrentAlbum.price)
-    },[generatedAlbumPrices])
+    },[generatedAlbumPrices, albumObject?.id])
 
     return (
         <>
